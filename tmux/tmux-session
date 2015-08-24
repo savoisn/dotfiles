@@ -1,9 +1,10 @@
 #!/bin/bash
 SESSION=ide-session
 
-tmux has-session -t $SESSION 
+echo "creating tmux session $SESSION"
+
+tmux has-session -t $SESSION
 AllreadyExists=$?
-echo $AllreadyExists
 
 if [[ $AllreadyExists -eq 0 ]] 
 then
@@ -14,16 +15,16 @@ fi
 tmux -2 new-session -d -s $SESSION
 
 # Setup a window for tailing log files
-tmux new-window -t $SESSION:1 -n 'Shells'
+#tmux new-window -t $SESSION:1 -n 'Shells'
 tmux split-window -h
-tmux select-pane -t 0
-tmux send-keys "echo 'pane1'" C-m
 tmux select-pane -t 1
-tmux send-keys "echo 'pane2'" C-m
+tmux send-keys "g sgdir && npm run build:dev" C-m
+tmux select-pane -t 2
+tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
 tmux split-window -v
-tmux resize-pane -D 5
+tmux split-window -v
 tmux send-keys "htop" C-m
-tmux select-pane -t 0
+tmux select-pane -t 1
 tmux split-window -v
 tmux new-window -t $SESSION:2 -n 'Vim' 'vim'
 
