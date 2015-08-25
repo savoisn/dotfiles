@@ -14,4 +14,5 @@ git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coff
 
 ln -fs ~/.vim/vimrc/vimrc ~/.vimrc
 ln -fs $PWD/tmux/tmux-session ~/tmux-session
+ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
 

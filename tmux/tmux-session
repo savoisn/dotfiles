@@ -17,14 +17,14 @@ tmux -2 new-session -d -s $SESSION
 # Setup a window for tailing log files
 #tmux new-window -t $SESSION:1 -n 'Shells'
 tmux split-window -h
-tmux select-pane -t 1
+tmux select-pane -t 0
 tmux send-keys "g sgdir && npm run build:dev" C-m
-tmux select-pane -t 2
+tmux select-pane -t 1
 tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
 tmux split-window -v
 tmux split-window -v
 tmux send-keys "htop" C-m
-tmux select-pane -t 1
+tmux select-pane -t 0
 tmux split-window -v
 tmux new-window -t $SESSION:2 -n 'Vim' 'vim'
 
