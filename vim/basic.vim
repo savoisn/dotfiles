@@ -147,7 +147,7 @@ set foldcolumn=1
 syntax enable 
 
 try
-    colorscheme desert
+    colorscheme zenburn 
 catch
 endtry
 
