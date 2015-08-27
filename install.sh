@@ -11,7 +11,6 @@ while getopts ":o" opt; do
 
 done
 
-exit 0
 
 
 
@@ -30,6 +29,7 @@ git clone https://github.com/tpope/vim-pathogen.git  ~/.vim/pathogen
 ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
 git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script/
+git clone git://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade.git
 
 
 #vimrc
@@ -42,8 +42,7 @@ ln -fs $PWD/vim ~/.vim/vimrc
 
 #colors
 rm -Rf ~/.vim/colors
-mkdir -p ~/.vim/colors
-ln -fs $PWD/vim/colors/zenburn.vim ~/.vim/colors/zenburn.vim
+ln -fs $PWD/vim/colors ~/.vim/colors
 
 ln -fs ~/.vim/vimrc/vimrc ~/.vimrc
 ln -fs $PWD/tmux/tmux-session ~/tmux-session

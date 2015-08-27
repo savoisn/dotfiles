@@ -8,8 +8,9 @@ AllreadyExists=$?
 
 if [[ $AllreadyExists -eq 0 ]] 
 then
-    tmux -2 attach-session -d -t $SESSION
-    exit 0
+  echo "tmux session found, attaching to it"
+  tmux -2 attach-session -d -t $SESSION
+  exit 0
 fi
 
 tmux -2 new-session -d -s $SESSION
