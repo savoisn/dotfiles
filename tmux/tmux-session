@@ -19,7 +19,6 @@ tmux -2 new-session -d -s $SESSION
 #tmux new-window -t $SESSION:1 -n 'Shells'
 tmux split-window -h
 tmux select-pane -t 0
-tmux send-keys "g sgdir && npm run build:dev" C-m
 tmux select-pane -t 1
 tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
 tmux split-window -v
@@ -27,10 +26,17 @@ tmux split-window -v
 tmux send-keys "htop" C-m
 tmux select-pane -t 0
 tmux split-window -v
-tmux new-window -t $SESSION:2 -n 'Vim' 'vim'
+tmux new-window -t $SESSION:2 -n 'Vim' 
+tmux select-pane -t 0
+tmux send-keys "vim --remote-silent" C-m
 
 # Set default window
 tmux select-window -t $SESSION:1
+
+tmux select-pane -t 0
+tmux send-keys "g sgdir && npm run build:dev" C-m
+tmux select-pane -t 2
+tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
 
 # Attach to session
 tmux -2 attach-session -t $SESSION
