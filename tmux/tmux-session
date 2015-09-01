@@ -1,4 +1,27 @@
 #!/bin/bash
+
+PROFILES="
+HOME
+SGDIR
+GO
+JHIPSTER
+"
+
+usage(){
+  echo "only 1 argument needed as profile name"
+  echo "available profiles are : $PROFILES"
+}
+
+nb_argument=$#
+
+if [[ nb_argument -gt 1 ]]
+then
+  usage
+  exit 1
+fi
+
+PROFILE=$1
+
 SESSION=ide-session
 
 echo "creating tmux session $SESSION"
@@ -20,7 +43,6 @@ tmux -2 new-session -d -s $SESSION
 tmux split-window -h
 tmux select-pane -t 0
 tmux select-pane -t 1
-tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
 tmux split-window -v
 tmux split-window -v
 tmux send-keys "htop" C-m
@@ -28,16 +50,51 @@ tmux select-pane -t 0
 tmux split-window -v
 tmux new-window -t $SESSION:2 -n 'Vim' 
 tmux select-pane -t 0
-tmux send-keys "vim --remote-silent" C-m
 
 # Set default window
 tmux select-window -t $SESSION:1
 
-tmux select-pane -t 0
-tmux send-keys "g sgdir && npm run build:dev" C-m
-tmux select-pane -t 2
-tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
+if [ "$PROFILE" == "SGDIR" ]
+then
+  echo "ici sgdir"
+  tmux select-pane -t 0
+  tmux send-keys "g sgdir && npm run build:dev" C-m
+  tmux select-pane -t 2
+  tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
+  tmux select-window -t $SESSION:2
+  tmux send-keys "vim --servername VI" C-m
+elif [ "$PROFILE" == "HOME" ];
+then
+  echo "ici home"
+  tmux select-pane -t 0
+  tmux send-keys "echo 'HOME'" C-m
+  tmux select-pane -t 2
+  tmux send-keys "echo 'HOME'" C-m
+  tmux select-window -t $SESSION:2
+  tmux send-keys "vim --servername VI" C-m
+elif [ "$PROFILE" == "GO" ];
+then
+  echo "ici go"
+  tmux select-pane -t 0
+  tmux send-keys "cd $GOPATH" C-m
+  tmux select-pane -t 2
+  tmux send-keys "echo 'GO'" C-m
+  tmux select-window -t $SESSION:2
+  tmux send-keys "vim --servername VI" C-m
+elif [ "$PROFILE" == "JHIPSTER" ];
+then
+  echo "ici jhpister" 
+  tmux select-pane -t 0
+  tmux send-keys "cd ~/Projects/jhipster" C-m
+  tmux select-pane -t 2
+  tmux send-keys "cd ~/Projects/jhipster/ && docker-compose up -d" C-m
+  tmux select-window -t $SESSION:2
+  tmux send-keys "cd ~/Projects/jhipster/ && vim --servername VI" C-m
+else
+  echo "ici else"
+fi
 
+tmux select-window -t $SESSION:1
 # Attach to session
 tmux -2 attach-session -t $SESSION
 

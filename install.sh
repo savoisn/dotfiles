@@ -31,6 +31,8 @@ then
   git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
   git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script/
   git clone git://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade.git
+  #git clone git://github.com/Shougo/vimshell.vim.git ~/.vim/bundle/vimshell.vim.git
+  git clone git://github.com/Shougo/neocopmlete.vim.git ~/.vim/bundle/neocomplete.vim.git
 fi
 
 #vimrc
