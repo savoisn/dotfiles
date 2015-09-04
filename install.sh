@@ -33,6 +33,7 @@ then
   git clone git://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade.git
   #git clone git://github.com/Shougo/vimshell.vim.git ~/.vim/bundle/vimshell.vim.git
   git clone git://github.com/Shougo/neocopmlete.vim.git ~/.vim/bundle/neocomplete.vim.git
+  git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim.git
 fi
 
 #vimrc
