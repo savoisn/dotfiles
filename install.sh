@@ -30,10 +30,11 @@ then
   ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
   git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
   git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script/
-  git clone git://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade.git
-  #git clone git://github.com/Shougo/vimshell.vim.git ~/.vim/bundle/vimshell.vim.git
-  git clone git://github.com/Shougo/neocopmlete.vim.git ~/.vim/bundle/neocomplete.vim.git
-  git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim.git
+  git clone git://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade
+  git clone https://github.com/genoma/vim-less.git ~/.vim/bundle/vim-less
+  git clone https://github.com/Shougo/neocomplete.vim.git ~/.vim/bundle/neocomplete.vim
+  git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
+  
 fi
 
 #vimrc
