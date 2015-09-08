@@ -86,6 +86,16 @@ then
   tmux send-keys "docker start jhipster && sleep 5 && ssh -p 4022 jhipster@localhost -t 'cd /jhipster; bash -l'" C-m
   tmux select-window -t $SESSION:2
   tmux send-keys "cd ~/Projects/jhipster/ && vim --servername VI" C-m
+elif [ "$PROFILE" == "demo" ];
+then
+  tmux select-pane -t 0
+  tmux send-keys "cd ~/Projects/jhipster/demo" C-m
+  tmux select-pane -t 2
+  tmux send-keys "cd ~/Projects/jhipster/demo && docker-compose start && sleep 5 && ssh -p 4022 jhipster@localhost -t 'cd /jhipster; mvn spring-boot:run; bash -l'" C-m
+  tmux select-pane -t 3
+  tmux send-keys "sleep 6 && ssh -p 4022 jhipster@localhost -t 'cd /jhipster; grunt serve; bash -l'" C-m
+  tmux select-window -t $SESSION:2
+  tmux send-keys "cd ~/Projects/jhipster/demo && vim --servername VI" C-m
 else
   echo "ici else"
 fi
