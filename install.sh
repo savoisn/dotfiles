@@ -1,4 +1,31 @@
 #!/bin/bash
+
+function cloneOrUpdate () {
+  URL="/$1"
+  BUNDLE_FOLDER=$2
+  clone_folder_name=$3
+  if [ -z $clone_folder_name ]
+  then
+    clone_folder_name="$2/${URL##/*/}"
+    echo $clone_folder_name
+  else
+    clone_folder_name="$2/$3"
+  fi
+
+  if [ -d $clone_folder_name/.git ]
+  then
+#    cd $clone_folder_name
+    echo $PWD
+    git -C $clone_folder_name pull
+  else
+    git clone $1 $clone_folder_name
+  fi
+
+}
+
+BUNDLE_PATH=~/.vim/bundle
+
+
 ONLY_LINKS="false"
 while getopts ":o" opt; do
   case $opt in
@@ -7,33 +34,26 @@ while getopts ":o" opt; do
       echo "hum o"
       ;;
   esac
-
 done
 
 
 
-
-#rm -Rf ~/.vim
-
-
 #PLUGINS
 mkdir -p ~/.vim/
-rm -Rf ~/.vim/autoload
-rm -Rf ~/.vim/bundle
-mkdir -p ~/.vim/autoload/
-mkdir -p ~/.vim/bundle/
 
 if [[ $ONLY_LINKS == "false" ]]
 then
-  rm -Rf ~/.vim/pathogen
-  git clone https://github.com/tpope/vim-pathogen.git  ~/.vim/pathogen
+  mkdir -p ~/.vim/autoload/
+  mkdir -p ~/.vim/bundle/
+  cloneOrUpdate https://github.com/tpope/vim-pathogen.git ~/.vim pathogen
   ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
-  git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
-  git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script/
-  git clone git://github.com/digitaltoad/vim-jade.git ~/.vim/bundle/vim-jade
-  git clone https://github.com/genoma/vim-less.git ~/.vim/bundle/vim-less
-  git clone https://github.com/Shougo/neocomplete.vim.git ~/.vim/bundle/neocomplete.vim
-  git clone https://github.com/szw/vim-ctrlspace.git ~/.vim/bundle/vim-ctrlspace
+  cloneOrUpdate https://github.com/scrooloose/nerdtree.git $BUNDLE_PATH nerdtree
+  cloneOrUpdate https://github.com/kchmck/vim-coffee-script.git $BUNDLE_PATH vim-coffee-script
+  cloneOrUpdate git://github.com/digitaltoad/vim-jade.git $BUNDLE_PATH vim-jade
+  cloneOrUpdate https://github.com/genoma/vim-less.git $BUNDLE_PATH vim-less
+  cloneOrUpdate https://github.com/Shougo/neocomplete.vim.git $BUNDLE_PATH neocomplete.vim
+  cloneOrUpdate https://github.com/szw/vim-ctrlspace.git $BUNDLE_PATH vim-ctrlspace
+  cloneOrUpdate https://github.com/rking/ag.vim $BUNDLE_PATH ag
 fi
 
 #vimrc

@@ -63,7 +63,7 @@ nmap <leader>w :w!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
-" command W w !sudo tee % > /dev/null
+command W w
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -278,8 +278,7 @@ endtry
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l-%c
-
+set statusline=[%n]\ %<%F\ [%M%R%H%W%Y][%{&ff}]\%=\ line:%l/%L\ col:%c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
