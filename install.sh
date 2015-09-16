@@ -15,9 +15,10 @@ function cloneOrUpdate () {
   if [ -d $clone_folder_name/.git ]
   then
 #    cd $clone_folder_name
-    echo $PWD
+    echo "pulling $clone_folder_name"
     git -C $clone_folder_name pull
   else
+    echo "cloning new projet $1 into $clone_folder_name"
     git clone $1 $clone_folder_name
   fi
 
@@ -48,6 +49,7 @@ then
   cloneOrUpdate https://github.com/tpope/vim-pathogen.git ~/.vim pathogen
   ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
   cloneOrUpdate https://github.com/scrooloose/nerdtree.git $BUNDLE_PATH nerdtree
+  cloneOrUpdate https://github.com/scrooloose/nerdcommenter.git $BUNDLE_PATH nerdcommenter
   cloneOrUpdate https://github.com/kchmck/vim-coffee-script.git $BUNDLE_PATH vim-coffee-script
   cloneOrUpdate git://github.com/digitaltoad/vim-jade.git $BUNDLE_PATH vim-jade
   cloneOrUpdate https://github.com/genoma/vim-less.git $BUNDLE_PATH vim-less
