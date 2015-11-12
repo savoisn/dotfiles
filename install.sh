@@ -57,6 +57,7 @@ then
   cloneOrUpdate https://github.com/szw/vim-ctrlspace.git $BUNDLE_PATH vim-ctrlspace
   cloneOrUpdate https://github.com/rking/ag.vim $BUNDLE_PATH ag
   cloneOrUpdate https://github.com/plasticboy/vim-markdown.git $BUNDLE_PATH vim-markdown
+  cloneOrUpdate https://github.com/klen/python-mode $BUNDLE_PATH python-mode
   
 fi
 

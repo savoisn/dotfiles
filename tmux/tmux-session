@@ -54,14 +54,14 @@ tmux select-pane -t 0
 # Set default window
 tmux select-window -t $SESSION:1
 
-if [ "$PROFILE" == "SGDIR" ]
+if [[ "$PROFILE" == "SGDIR" || "$PROFILE" == "sgdir" ]]
 then
   tmux select-pane -t 0
   tmux send-keys "g sgdir && npm run build:dev" C-m
   tmux select-pane -t 2
   tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
   tmux select-window -t $SESSION:2
-  tmux send-keys "vim --servername VI" C-m
+  tmux send-keys "g sgdir && vim --servername VI" C-m
 elif [ "$PROFILE" == "HOME" ];
 then
   tmux select-pane -t 0
