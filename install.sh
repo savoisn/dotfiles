@@ -48,6 +48,8 @@ then
   mkdir -p ~/.vim/bundle/
   cloneOrUpdate https://github.com/tpope/vim-pathogen.git ~/.vim pathogen
   ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
+  cloneOrUpdate https://github.com/godlygeek/csapprox.git $BUNDLE_PATH csapprox
+  cloneOrUpdate https://github.com/fatih/vim-go.git $BUNDLE_PATH csapprox
   cloneOrUpdate https://github.com/scrooloose/nerdtree.git $BUNDLE_PATH nerdtree
   cloneOrUpdate https://github.com/scrooloose/nerdcommenter.git $BUNDLE_PATH nerdcommenter
   cloneOrUpdate https://github.com/kchmck/vim-coffee-script.git $BUNDLE_PATH vim-coffee-script
@@ -58,7 +60,6 @@ then
   cloneOrUpdate https://github.com/rking/ag.vim $BUNDLE_PATH ag
   cloneOrUpdate https://github.com/plasticboy/vim-markdown.git $BUNDLE_PATH vim-markdown
   cloneOrUpdate https://github.com/klen/python-mode $BUNDLE_PATH python-mode
-  
 fi
 
 #vimrc
