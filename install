@@ -85,6 +85,15 @@ ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
 #zsh
 ln -fs $PWD/zsh/zshrc ~/.zshrc
 ln -fs $PWD/zsh/completions ~/.zsh/completions
-ln -fs $PWD/zsh/custom ~/.oh-my-zsh/custom
 
+if [[ -d ~/.oh-my-zsh/custom ]]
+then
+  mv ~/.oh-my-zsh/custom ~/.oh-my-zsh/custom_before_install
+fi
+
+if [[ -L ~/.oh-my-zsh/custom ]]
+then
+  rm ~/.oh-my-zsh/custom
+fi
+ln -fs $PWD/zsh/custom ~/.oh-my-zsh/custom
 
