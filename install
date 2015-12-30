@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 function cloneOrUpdate () {
   URL="/$1"
@@ -27,24 +27,30 @@ function cloneOrUpdate () {
 BUNDLE_PATH=~/.vim/bundle
 
 
-ONLY_LINKS="false"
+WITH_LINKS="false"
 while getopts ":o" opt; do
   case $opt in
     o)
-      ONLY_LINKS="true" 
+      WITH_LINKS="true" 
       echo "hum o"
       ;;
   esac
 done
 
-
+# installing zplug
+if [[ -d ~/.zplug/zplug ]]
+then
+  curl -fLo ~/.zplug/zplug --create-dirs https://git.io/zplug
+fi
+source ~/.zplug/zplug
+zplug update --self
 
 #PLUGINS
 mkdir -p ~/.vim/
 mkdir -p ~/.zsh/
 
 
-if [[ $ONLY_LINKS == "false" ]]
+if [[ $WITH_LINKS == "true" ]]
 then
   mkdir -p ~/.vim/autoload/
   mkdir -p ~/.vim/bundle/
@@ -79,5 +85,6 @@ ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
 #zsh
 ln -fs $PWD/zsh/zshrc ~/.zshrc
 ln -fs $PWD/zsh/completions ~/.zsh/completions
+ln -fs $PWD/zsh/custom ~/.oh-my-zsh/custom
 
 
