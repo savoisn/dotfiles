@@ -41,6 +41,8 @@ done
 
 #PLUGINS
 mkdir -p ~/.vim/
+mkdir -p ~/.zsh/
+
 
 if [[ $ONLY_LINKS == "false" ]]
 then
@@ -73,4 +75,9 @@ ln -fs $PWD/vim/colors ~/.vim/colors
 ln -fs ~/.vim/vimrc/vimrc ~/.vimrc
 ln -fs $PWD/tmux/tmux-session ~/tmux-session
 ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
+
+#zsh
+ln -fs $PWD/zsh/zshrc ~/.zshrc
+ln -fs $PWD/zsh/completions ~/.zsh/completions
+
 
