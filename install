@@ -28,11 +28,11 @@ BUNDLE_PATH=~/.vim/bundle
 
 
 WITH_LINKS="false"
-while getopts ":o" opt; do
+while getopts ":w" opt; do
   case $opt in
-    o)
+    w)
       WITH_LINKS="true" 
-      echo "hum o"
+      echo "hum w"
       ;;
   esac
 done
@@ -57,7 +57,7 @@ then
   cloneOrUpdate https://github.com/tpope/vim-pathogen.git ~/.vim pathogen
   ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
   cloneOrUpdate https://github.com/godlygeek/csapprox.git $BUNDLE_PATH csapprox
-  cloneOrUpdate https://github.com/fatih/vim-go.git $BUNDLE_PATH csapprox
+  cloneOrUpdate https://github.com/fatih/vim-go.git $BUNDLE_PATH vim-go 
   cloneOrUpdate https://github.com/scrooloose/nerdtree.git $BUNDLE_PATH nerdtree
   cloneOrUpdate https://github.com/scrooloose/nerdcommenter.git $BUNDLE_PATH nerdcommenter
   cloneOrUpdate https://github.com/kchmck/vim-coffee-script.git $BUNDLE_PATH vim-coffee-script
@@ -68,6 +68,9 @@ then
   cloneOrUpdate https://github.com/rking/ag.vim $BUNDLE_PATH ag
   cloneOrUpdate https://github.com/plasticboy/vim-markdown.git $BUNDLE_PATH vim-markdown
   cloneOrUpdate https://github.com/klen/python-mode $BUNDLE_PATH python-mode
+  cloneOrUpdate https://github.com/lukerandall/haskellmode-vim.git $BUNDLE_PATH haskellmode-vim
+  cloneOrUpdate https://github.com/scrooloose/syntastic.git $BUNDLE_PATH syntastic
+  cloneOrUpdate https://github.com/majutsushi/tagbar $BUNDLE_PATH tagbar
 fi
 
 #vimrc
@@ -86,14 +89,14 @@ ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
 ln -fs $PWD/zsh/zshrc ~/.zshrc
 ln -fs $PWD/zsh/completions ~/.zsh/completions
 
-if [[ -d ~/.oh-my-zsh/custom ]]
+if [[ -d $ZSH/custom ]]
 then
-  mv ~/.oh-my-zsh/custom ~/.oh-my-zsh/custom_before_install
+  mv $ZSH/custom $ZSH/custom_before_install
 fi
 
-if [[ -L ~/.oh-my-zsh/custom ]]
+if [[ -L $ZSH/custom ]]
 then
-  rm ~/.oh-my-zsh/custom
+  rm $ZSH/custom
 fi
-ln -fs $PWD/zsh/custom ~/.oh-my-zsh/custom
+ln -fs $PWD/zsh/custom $ZSH/custom
 

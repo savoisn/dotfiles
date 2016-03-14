@@ -51,23 +51,35 @@ DISABLE_AUTO_TITLE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git hub gulp npm vi-mode nvm)
+#
+plugins=(git hub gulp npm nvm go)
 
 # User configuration
 
-export PATH="/home/nicolas/.gvm/vertx/current/bin:/home/nicolas/.gvm/springboot/current/bin:/home/nicolas/.gvm/lazybones/current/bin:/home/nicolas/.gvm/jbake/current/bin:/home/nicolas/.gvm/groovyserv/current/bin:/home/nicolas/.gvm/groovy/current/bin:/home/nicolas/.gvm/griffon/current/bin:/home/nicolas/.gvm/grails/current/bin:/home/nicolas/.gvm/gradle/current/bin:/home/nicolas/.gvm/glide/current/bin:/home/nicolas/.gvm/gaiden/current/bin:/home/nicolas/.gvm/crash/current/bin:/home/nicolas/.gvm/asciidoctorj/current/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH=~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$PATH
+
 export M2_HOME=/usr/local/maven
 export M2=$M2_HOME/bin
 export PATH=$M2:$PATH
 
 export KEYTIMEOUT=1
 
-source $ZSH/oh-my-zsh.sh
-
+zplug "robbyrussell/oh-my-zsh", as:plugin, do:"source $ZSH/oh-my-zsh.sh"
 zplug "jocelynmallon/zshmarks", as:plugin
+zplug "bobthecow/git-flow-completion", as:plugin
 zplug load
 
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+source $ZSH/oh-my-zsh.sh
+source $ZPLUG_HOME/repos/bobthecow/git-flow-completion/git-flow-completion.zsh
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit && compinit
 # You may need to manually set your language environment
@@ -99,37 +111,28 @@ alias g="jump"
 alias m="bookmark"
 alias d="deletemark"
 alias p="showmarks"
-alias vi="vim --servername VI --remote "
+alias vi="vis --remote "
+alias vis="vim --servername VI "
+alias go_watch_test='watchmedo shell-command --patterns="*.go;*.txt;*.json" --recursive --command="go test" -W .'
 
 export TNU_ROOT_DIRECTORY=~/Workspace
 export TNU_SGDIR_ROOT_DIRECTORY=~/Workspace/sgdir/release/pepiniere-sgdir
 
-
-
-# The next line updates PATH for the Google Cloud SDK.
-source '/home/nicolas/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables bash completion for gcloud.
-source '/home/nicolas/google-cloud-sdk/completion.zsh.inc'
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 export PATH=$PATH:~/Applications/mongodb/bin
-export PATH=$PATH:~/Applications/hub/
+export PATH=$PATH:~/Applications/hub/bin
 export PATH=$PATH:~/Applications/lci/
+export PATH=$PATH:~/Applications/gitflow/bin
 
-export GOROOT=$HOME/Applications/go1.4.2
+export GOROOT=$HOME/Applications/go
 export PATH=$PATH:$GOROOT/bin
-export GOPATH=$HOME/Project/go
+export GOPATH=$HOME/Projects/go
+export PATH=$PATH:$GOPATH/bin
 
-alias vimgo='vim -u ~/.vimrc.go'
 export GATLING_HOME=$HOME/Applications/gatling
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/home/nicolas/.gvm/bin/gvm-init.sh" ]] && source "/home/nicolas/.gvm/bin/gvm-init.sh"
+[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
-export NVM_DIR="/home/nicolas/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 
