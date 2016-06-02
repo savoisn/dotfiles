@@ -32,7 +32,6 @@ while getopts ":w" opt; do
   case $opt in
     w)
       WITH_LINKS="true" 
-      echo "hum w"
       ;;
   esac
 done
@@ -42,8 +41,11 @@ if [[ -d ~/.zplug/zplug ]]
 then
   curl -fLo ~/.zplug/zplug --create-dirs https://git.io/zplug
 fi
-source ~/.zplug/zplug
-zplug update --self
+#source ~/.zplug/zplug
+#zplug update --self
+
+
+echo "ici"
 
 #PLUGINS
 mkdir -p ~/.vim/
@@ -52,10 +54,12 @@ mkdir -p ~/.zsh/
 
 if [[ $WITH_LINKS == "true" ]]
 then
+  echo "updating dependencies"
   mkdir -p ~/.vim/autoload/
   mkdir -p ~/.vim/bundle/
   cloneOrUpdate https://github.com/tpope/vim-pathogen.git ~/.vim pathogen
   ln -fs ~/.vim/pathogen/autoload/pathogen.vim ~/.vim/autoload/pathogen.vim
+  cloneOrUpdate https://github.com/tpope/vim-surround.git $BUNDLE_PATH vim-surround
   cloneOrUpdate https://github.com/godlygeek/csapprox.git $BUNDLE_PATH csapprox
   cloneOrUpdate https://github.com/fatih/vim-go.git $BUNDLE_PATH vim-go 
   cloneOrUpdate https://github.com/scrooloose/nerdtree.git $BUNDLE_PATH nerdtree
@@ -71,6 +75,9 @@ then
   cloneOrUpdate https://github.com/lukerandall/haskellmode-vim.git $BUNDLE_PATH haskellmode-vim
   cloneOrUpdate https://github.com/scrooloose/syntastic.git $BUNDLE_PATH syntastic
   cloneOrUpdate https://github.com/majutsushi/tagbar $BUNDLE_PATH tagbar
+  cloneOrUpdate https://github.com/elixir-lang/vim-elixir.git $BUNDLE_PATH vim-elixir
+  cloneOrUpdate https://github.com/lambdatoast/elm.vim.git $BUNDLE_PATH elm.vim 
+  cloneOrUpdate https://github.com/ekalinin/Dockerfile.vim.git $BUNDLE_PATH Dockerfile.vim
 fi
 
 #vimrc

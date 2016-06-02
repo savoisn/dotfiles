@@ -5,6 +5,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <C-n> :NERDTreeToggle<CR>
+map <C-i> :NERDTreeFind<CR>
+
+let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|cache|node_modules|bower_components|venv|wp-admin|wp-includes)[\/]'
 
 
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!

@@ -59,14 +59,38 @@ tmux resize-pane -t 1 -x 90
 # Set default window
 tmux select-window -t $SESSION:1
 
-if [[ "$PROFILE" == "SGDIR" || "$PROFILE" == "sgdir" ]]
+if [[ "$PROFILE" == "popartisan" || "$PROFILE" == "pop" || "$PROFILE" == "POPARTISAN" || "$PROFILE" == "POP" ]]
 then
   tmux select-window -t $SESSION:1
   tmux select-pane -t 2
-  tmux send-keys "g mothership && vagrant up" C-m
+  tmux send-keys "" C-m
   tmux select-window -t $SESSION:2
   tmux select-pane -t 0
-  tmux send-keys "g sgdir && vim --servername VI" C-m
+  tmux send-keys "" C-m
+  tmux select-pane -t 1
+  tmux send-keys "" C-m
+  tmux select-pane -t 2
+  tmux send-keys "" C-m
+elif [[ "$PROFILE" == "SGDIR" || "$PROFILE" == "sgdir" ]]
+then
+  exports="export PYTHONPATH=$PYTHONPATH:$HOME/Workspace/www/sgdir/releases/pepiniere-sgdir/venv/lib/python2.7/site-packages:$HOME/Workspace/www/sgdir/current/new_scripts"
+  tmux select-window -t $SESSION:1
+  tmux select-pane -t 2
+  tmux send-keys "g mothership" C-m
+  tmux select-window -t $SESSION:2
+  tmux select-pane -t 0
+  tmux send-keys "g sgdir && ${exports} && vis" C-m
+  tmux select-pane -t 1
+  tmux select-pane -t 2
+elif [[ "$PROFILE" == "SGDIR-VAGRANT" || "$PROFILE" == "sgdir-vagrant" ]]
+then
+  exports="export PYTHONPATH=$PYTHONPATH:$HOME/Workspace/www/sgdir/releases/pepiniere-sgdir/venv/lib/python2.7/site-packages:$HOME/Workspace/www/sgdir/current/new_scripts"
+  tmux select-window -t $SESSION:1
+  tmux select-pane -t 2
+  tmux send-keys "g mothership vagrant up" C-m
+  tmux select-window -t $SESSION:2
+  tmux select-pane -t 0
+  tmux send-keys "g sgdir && ${exports} && vis" C-m
   tmux select-pane -t 1
   tmux send-keys "ssh -A tnuvadm@dev-mothership.pepinie.re" C-m
   tmux select-pane -t 2
