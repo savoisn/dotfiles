@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-source ~/.zplug/zplug
+# source ~/.zplug/zplug
 
 stty -ixon
 # Set name of the theme to load.
@@ -53,7 +53,7 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #
-plugins=(git hub gulp npm nvm go)
+plugins=(git hub gulp npm nvm go jump docker docker-compose)
 
 # User configuration
 
@@ -68,20 +68,7 @@ export PATH=$M2:$PATH
 
 export KEYTIMEOUT=1
 
-zplug "robbyrussell/oh-my-zsh", as:plugin, do:"source $ZSH/oh-my-zsh.sh"
-zplug "jocelynmallon/zshmarks", as:plugin
-zplug "bobthecow/git-flow-completion", as:plugin
-zplug load
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
 source $ZSH/oh-my-zsh.sh
-source $ZPLUG_HOME/repos/bobthecow/git-flow-completion/git-flow-completion.zsh
 fpath=(~/.zsh/completions $fpath)
 autoload -U compinit && compinit
 # You may need to manually set your language environment
