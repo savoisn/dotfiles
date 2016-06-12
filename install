@@ -46,8 +46,13 @@ mkdir -p ~/.zsh/
 
 if [[ $WITH_INSTALL == "true" ]]
 then
-  sudo apt-get install vim-nox zsh git tmux 
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -  
+  sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
+  sudo apt-get update
+  sudo apt-get install -y vim-nox zsh git tmux google-chrome-stable 
   git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+  chsh -s /bin/zsh
 
   #docker
   sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -55,10 +60,11 @@ then
   sudo apt-get update
   sudo apt-get purge lxc-docker
   apt-cache policy docker-engine
-  sudo apt-get install linux-image-extra-$(uname -r)
-  sudo apt-get install docker-engine
+  sudo apt-get install -y linux-image-extra-$(uname -r)
+  sudo apt-get install -y docker-engine
   sudo groupadd docker
   sudo usermod -aG docker $(id -un)
+  exit 0
 fi
 
 if [[ $WITH_LINKS == "true" ]]
