@@ -28,29 +28,38 @@ BUNDLE_PATH=~/.vim/bundle
 
 
 WITH_LINKS="false"
-while getopts ":w" opt; do
+while getopts ":wi" opt; do
   case $opt in
     w)
       WITH_LINKS="true" 
       ;;
+    i)
+      WITH_INSTALL="true" 
+      ;;
   esac
 done
 
-# installing zplug
-if [[ -d ~/.zplug/zplug ]]
-then
-  curl -fLo ~/.zplug/zplug --create-dirs https://git.io/zplug
-fi
-#source ~/.zplug/zplug
-#zplug update --self
-
-
-echo "ici"
 
 #PLUGINS
 mkdir -p ~/.vim/
 mkdir -p ~/.zsh/
 
+if [[ $WITH_INSTALL == "true" ]]
+then
+  sudo apt-get install vim-nox zsh git tmux 
+  git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
+  #docker
+  sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  sudo sh -c 'echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" > /etc/apt/sources.list.d/docker2.list'
+  sudo apt-get update
+  sudo apt-get purge lxc-docker
+  apt-cache policy docker-engine
+  sudo apt-get install linux-image-extra-$(uname -r)
+  sudo apt-get install docker-engine
+  sudo groupadd docker
+  sudo usermod -aG docker $(id -un)
+fi
 
 if [[ $WITH_LINKS == "true" ]]
 then
