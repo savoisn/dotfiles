@@ -462,3 +462,6 @@ nmap <silent> <leader>n :silent :nohlsearch<cr>
 " Make sure that CTRL-A (used by gnu screen) is redefined
 noremap <leader>inc <C-A>
 
+nnoremap <C-S> yiw:%s/\<<C-r>"\>/<C-r>"/gc<Left><Left><Left>
+vnoremap <C-S> y:%s/\<<C-r>"\>/<C-r>"/gc<Left><Left><Left>
+

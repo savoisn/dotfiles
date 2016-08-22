@@ -93,6 +93,12 @@ then
   cloneOrUpdate https://github.com/elixir-lang/vim-elixir.git $BUNDLE_PATH vim-elixir
   cloneOrUpdate https://github.com/lambdatoast/elm.vim.git $BUNDLE_PATH elm.vim 
   cloneOrUpdate https://github.com/ekalinin/Dockerfile.vim.git $BUNDLE_PATH Dockerfile.vim
+
+  cloneOrUpdate https://github.com/jelera/vim-javascript-syntax.git $BUNDLE_PATH vim-javascript-syntax
+  cloneOrUpdate https://github.com/pangloss/vim-javascript.git $BUNDLE_PATH vim-javascript
+  cloneOrUpdate https://github.com/nathanaelkane/vim-indent-guides $BUNDLE_PATH vim-indent
+  
+  cloneOrUpdate https://github.com/pearofducks/ansible-vim $BUNDLE_PATH ansible-vim
 fi
 
 #vimrc

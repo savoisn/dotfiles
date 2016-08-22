@@ -112,6 +112,7 @@ export PATH=$PATH:~/Applications/hub/bin
 export PATH=$PATH:~/Applications/lci/
 export PATH=$PATH:~/Applications/gitflow/bin
 export PATH=$PATH:~/Applications/docker-compose
+export PATH=$PATH:~/Applications/packer
 
 
 export GOROOT=$HOME/Applications/go
@@ -127,3 +128,11 @@ export GATLING_HOME=$HOME/Applications/gatling
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
+drbb () {
+    if (( $# == 1 ))
+    then
+        docker run -it -u `id -u`:`id -g` --rm -v `pwd`:/appli -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group $1 /bin/bash
+    else
+        echo "need param for image to run"
+    fi
+}

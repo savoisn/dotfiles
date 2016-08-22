@@ -17,7 +17,7 @@ sudo apt-get install -y checkinstall
  
 mkdir -p ~/tmp
 cd ~/tmp
-rm -Rf vim
+sudo rm -Rf vim
 git clone https://github.com/vim/vim.git
 cd vim
 make distclean
