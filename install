@@ -51,6 +51,8 @@ then
 
   sudo apt-get update
   sudo apt-get install -y vim-nox zsh git tmux google-chrome-stable 
+  git config --global user.email nicolas.savois@gmail.com
+  git config --global user.name savoisn
   git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
   chsh -s /bin/zsh
 
