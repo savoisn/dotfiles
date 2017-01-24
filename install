@@ -118,7 +118,13 @@ ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
 
 #zsh
 ln -fs $PWD/zsh/zshrc ~/.zshrc
+ln -fs $PWD/zsh/zshrc_alias ~/.zshrc_alias
 ln -fs $PWD/zsh/completions ~/.zsh/completions
+
+#i3
+ln -fs $PWD/i3/config ~/.config/i3/config
+ln -fs $PWD/i3/status.conf ~/.config/i3/status.conf
+ln -fs $PWD/i3/i3exit ~/.config/i3/i3exit
 
 if [[ -d $ZSH/custom ]]
 then

@@ -62,10 +62,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 export PATH=~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$PATH
 export PATH=~/.local/bin:$PATH
 
-export M2_HOME=/usr/local/maven
-export M2=$M2_HOME/bin
-export PATH=$M2:$PATH
-
 export KEYTIMEOUT=1
 
 source $ZSH/oh-my-zsh.sh
@@ -96,17 +92,10 @@ autoload -U compinit && compinit
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias g="jump"
-alias m="bookmark"
-alias d="deletemark"
-alias p="showmarks"
-alias vi="vis --remote "
-alias vis="vim --servername VI "
-alias go_watch_test='watchmedo shell-command --patterns="*.go;*.txt;*.json" --recursive --command="go test" -W .'
+export TNU_ROOT_DIRECTORY=~/Project/fastit/aws/
+export TNU_SGDIR_ROOT_DIRECTORY=${TNU_ROOT_DIRECTORY}/sgdir/release/pepiniere-sgdir
 
-export TNU_ROOT_DIRECTORY=~/Workspace
-export TNU_SGDIR_ROOT_DIRECTORY=~/Workspace/sgdir/release/pepiniere-sgdir
-
+export PATH=$PATH:~/bin
 export PATH=$PATH:~/Applications/mongodb/bin
 export PATH=$PATH:~/Applications/hub/bin
 export PATH=$PATH:~/Applications/lci/
@@ -117,13 +106,26 @@ export PATH=$PATH:~/Applications/packer
 
 export GOROOT=$HOME/Applications/go
 export PATH=$PATH:$GOROOT/bin
-export GOPATH=$HOME/Projects/go
+export GOPATH=$HOME/Project/go
 export PATH=$PATH:$GOPATH/bin
+
+export AWS_ACCESS_KEY_ID='AKIAJMQUCCHP2FN6VF2A'
+export AWS_SECRET_ACCESS_KEY='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'
+
 
 export GATLING_HOME=$HOME/Applications/gatling
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
+
+alias g="jump"
+alias m="bookmark"
+alias d="deletemark"
+alias p="showmarks"
+alias vi="vis --remote "
+alias vis="vim --servername VI "
+alias go_watch_test='watchmedo shell-command --patterns="*.go;*.txt;*.json" --recursive --command="go test" -W .'
+alias git=hub
+alias dc=docker-compose
+
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -136,3 +138,8 @@ drbb () {
         echo "need param for image to run"
     fi
 }
+
+source .zshrc_alias
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
