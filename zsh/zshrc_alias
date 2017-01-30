@@ -1,3 +1,26 @@
+bright_up(){
+  max_brightness=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+  brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+  echo $max_brightness
+  echo $brightness
+
+  if [ $brightness -lt $max_brightness ]; then
+    let brightness=$brightness+100
+    echo "echo $brightness > /sys/class/backlight/intel_backlight/brightness" | sudo zsh
+  fi
+}
+
+bright_down(){
+
+  brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+
+  if [ $brightness -gt 0 ]; then
+    let brightness=$brightness-100
+    echo "echo $brightness > /sys/class/backlight/intel_backlight/brightness" | sudo zsh #or bash
+  fi
+
+}
+
 alias elixir="docker run -it -u `id -u`:`id -g` --rm -v `pwd`:/appli -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group nsa/phoenix:e133 elixir "
 
 alias iex="docker run -it -u `id -u`:`id -g` --rm -v `pwd`:/appli -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group nsa/phoenix:e133 iex "
@@ -151,6 +174,7 @@ mdp(){
 }
 
 mutt(){
+	del_stopped mutt
 	read -s ?"type gmail password " password
 
 	GMAIL="nicolas.savois@gmail.com"
@@ -183,6 +207,36 @@ notify_osd(){
 		-e "DISPLAY=unix${DISPLAY}" \
 		--name notify_osd \
 		nsa/notify-osd
+}
+
+playonlinux(){
+	# one day remove /etc/hosts bind mount when effing
+	# overlay support inotify, such bullshit
+	docker run -it --rm \
+		-v /etc/localtime:/etc/localtime:ro \
+		-v /etc/machine-id:/etc/machine-id:ro \
+		-v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /home/nico/Games:/home/gamer:rw \
+		-v "/var/run/user/$(id -u):/var/run/user/$(id -u)" \
+		-v "${HOME}/.Xauthority:$HOME/.Xauthority" \
+		-v /var/run/dbus:/var/run/dbus \
+		-v /dev/shm:/dev/shm \
+		-v /etc/hosts:/etc/hosts \
+    -v /etc/passwd:/etc/passwd \
+    -e "HOME:${HOME}" \
+		-e "DISPLAY=unix${DISPLAY}" \
+		-e XAUTHORITY \
+    -u $(id -u):$(id -g) \
+		--security-opt seccomp:/home/nico/Project/jessfraz/dotfiles/etc/docker/seccomp/chrome.json \
+		--device /dev/snd \
+		--device /dev/dri \
+		--device /dev/video0 \
+		--device /dev/bus/usb \
+		--group-add audio \
+		--group-add video \
+		--name playonlinux \
+    --entrypoint /bin/bash \
+		nsa/playonlinux
 }
 
 pulseaudio(){
@@ -246,7 +300,13 @@ torproxy(){
 }
 
 
-mirror-monitor(){
+mirror-display(){
+  if [[ $# != 1 ]]; then
+    echo "need 1 param for monitor name"
+    return 1
+  fi
+	local monitor_name=$1
+  echo $monitor_name
 
 	#xrandr --newmode "3840x2160_30.00"  338.75  3840 4080 4488 5136  2160 2163 2168 2200 -hsync +vsync
 	#xrandr --addmode  DP1 "3840x2160_30.00"
@@ -258,7 +318,22 @@ mirror-monitor(){
   #xrandr --newmode "1920x1080-default"   138.70   1920 1968 2000 2080   1080 1083 1088 1111 +hsync -vsync
   #xrandr --addmode eDP1 "1920x1080-default"
   
-  xrandr --output eDP1 --auto --primary --output DP-2 --auto --same-as eDP1
+  xrandr --output eDP1 --auto --primary --output $monitor_name --auto --same-as eDP1
+  retour=$?
+  echo $retour
+  return $retour
 }
+
+
+shutdown-display(){
+  if [[ $# != 1 ]]; then
+    echo "need 1 param for monitor name"
+    return 1
+  fi
+	local monitor_name=$1
+  xrandr --output eDP1 --auto --output $monitor_name --off
+}
+
+
 
 
