@@ -43,6 +43,7 @@ done
 #PLUGINS
 mkdir -p ~/.vim/
 mkdir -p ~/.zsh/
+mkdir -p ~/.config/i3/
 
 if [[ $WITH_INSTALL == "true" ]]
 then
