@@ -120,6 +120,7 @@ ln -fs $PWD/tmux/tmux.conf ~/.tmux.conf
 #zsh
 ln -fs $PWD/zsh/zshrc ~/.zshrc
 ln -fs $PWD/zsh/zshrc_alias ~/.zshrc_alias
+ln -fs $PWD/zsh/zshrc_functions ~/.zshrc_functions
 ln -fs $PWD/zsh/completions ~/.zsh/completions
 
 #i3
