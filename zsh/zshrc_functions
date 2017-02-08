@@ -140,12 +140,17 @@ eclipse(){
 
 
 base_elixir(){
+
+  relies_on postgres_vinolien
+
   docker run -it --rm \
     -u `id -u`:`id -g` \
     -v `pwd`:/appli \
     -v /etc/passwd:/etc/passwd \
     -v /etc/group:/etc/group \
-    nsa/phoenix:e133 $*
+    -p 4000:4000 \
+    --link postgres_vinolien:postgres \
+    nsa/elixir:141 $*
 }
 
 erl(){
@@ -164,12 +169,26 @@ elixir(){
 npm_elixir(){
   base_elixir npm $*
 }
+node_elixir(){
+  base_elixir node $*
+}
+
 iex(){
   base_elixir iex $*
 }
 
 phoenix(){
   base_elixir phoenix $*
+}
+
+postgres_vinolien(){
+
+	del_stopped postgres_vinolien
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    --name postgres_vinolien \
+    postgres
 }
 
 idea(){
