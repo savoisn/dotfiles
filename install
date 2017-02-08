@@ -43,7 +43,7 @@ done
 #PLUGINS
 mkdir -p ~/.vim/
 mkdir -p ~/.zsh/
-mkdir -p ~/.config/i3/
+mkdir -p ~/.config/i3
 
 if [[ $WITH_INSTALL == "true" ]]
 then
@@ -128,15 +128,4 @@ ln -fs $PWD/i3/config ~/.config/i3/config
 ln -fs $PWD/i3/i3status.conf ~/.config/i3/i3status.conf
 ln -fs $PWD/i3/py3status.conf ~/.config/i3/py3status.conf
 ln -fs $PWD/i3/i3exit ~/.config/i3/i3exit
-
-if [[ -d $ZSH/custom ]]
-then
-  mv $ZSH/custom $ZSH/custom_before_install
-fi
-
-if [[ -L $ZSH/custom ]]
-then
-  rm $ZSH/custom
-fi
-ln -fs $PWD/zsh/custom $ZSH/custom
 
