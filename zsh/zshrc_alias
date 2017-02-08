@@ -1,8 +1,2 @@
-alias elixir="docker run -it -u `id -u`:`id -g` --rm -v `pwd`:/appli -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group nsa/phoenix:e133 elixir "
-
-alias iex="docker run -it -u `id -u`:`id -g` --rm -v `pwd`:/appli -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group nsa/phoenix:e133 iex "
-
-
-
 
 

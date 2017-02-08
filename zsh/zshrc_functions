@@ -138,15 +138,50 @@ eclipse(){
 		nsa/eclipse:mars
 }
 
+
+base_elixir(){
+  docker run -it --rm \
+    -u `id -u`:`id -g` \
+    -v `pwd`:/appli \
+    -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
+    nsa/phoenix:e133 $*
+}
+
+erl(){
+
+  base_elixir erl $*
+}
+
+mix(){
+  base_elixir mix $*
+}
+
+elixir(){
+  base_elixir elixir $*
+}
+
+npm_elixir(){
+  base_elixir npm $*
+}
+iex(){
+  base_elixir iex $*
+}
+
+phoenix(){
+  base_elixir phoenix $*
+}
+
 idea(){
 	del_stopped idea
 
-	docker run -it --rm \
+	docker run -d \
 		-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
     -v /etc/passwd:/etc/passwd \
     -v ~/Project/Idea/fakehome:$HOME \
     -v ~/Project/Idea/Project:/Project \
     -e DISPLAY \
+    -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
     -u $(id -u):$(id -g) \
 		--name idea \
 		nsa/intellij:idea
