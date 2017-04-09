@@ -19,6 +19,7 @@ mkdir -p ~/tmp
 cd ~/tmp
 sudo rm -Rf vim
 git clone https://github.com/vim/vim.git
+git checkout v7.4.2367
 cd vim
 make distclean
 ./configure --with-features=huge \
@@ -41,6 +42,5 @@ sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
 sudo update-alternatives --set editor /usr/bin/vim
 sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim 1
 sudo update-alternatives --set vi /usr/bin/vim
-
 
 

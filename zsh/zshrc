@@ -96,6 +96,7 @@ export TNU_ROOT_DIRECTORY=~/Project/fastit/aws/
 export TNU_SGDIR_ROOT_DIRECTORY=${TNU_ROOT_DIRECTORY}/sgdir/release/pepiniere-sgdir
 
 export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin/robomongo-1.0.0-rc1/bin
 export PATH=$PATH:~/Applications/mongodb/bin
 export PATH=$PATH:~/Applications/hub/bin
 export PATH=$PATH:~/Applications/lci/
@@ -104,7 +105,7 @@ export PATH=$PATH:~/Applications/docker-compose
 export PATH=$PATH:~/Applications/packer
 
 
-export GOROOT=$HOME/Applications/go
+export GOROOT=$HOME/bin/go
 export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Project/go
 export PATH=$PATH:$GOPATH/bin
@@ -144,3 +145,7 @@ source ~/.zshrc_functions
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ -s "$HOME/.cargo/env" ]] && source $HOME/.cargo/env

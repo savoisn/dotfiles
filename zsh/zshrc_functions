@@ -139,6 +139,18 @@ eclipse(){
 }
 
 
+base_erl(){
+
+
+  docker run -it --rm \
+    -u `id -u`:`id -g` \
+    -v `pwd`:/appli \
+    -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
+    nsa/alpine_phoenix:1.0.0 $* 
+    #nsa/elixir:141-open $*
+
+}
 base_elixir(){
 
   relies_on postgres_vinolien
@@ -149,13 +161,35 @@ base_elixir(){
     -v /etc/passwd:/etc/passwd \
     -v /etc/group:/etc/group \
     -p 4000:4000 \
+    -p 8000:8000 \
     --link postgres_vinolien:postgres \
-    nsa/elixir:141 $*
+    nsa/elixir:141-open $*
+    #nsa/alpine_phoenix:1.0.0 $* 
 }
 
-erl(){
+runAlpinePhoenix(){
+	docker build -t nsa/vinolien .
 
-  base_elixir erl $*
+  docker run -it --rm \
+    -e POSTGRESQL_ADDON_URI="postgresql://postgres:postgres@postgres:5432/appli_dev" \
+    -e PORT="4000" \
+    -e SECRET_KEY_BASE="2UJP0mmVqzQbxXvz1ZRulehkeGFr0O5JuOPvtUsV08Dy5HYAMcY+yvKeNMpjQ6EA" \
+    -e MIX_ENV=prod_cc \
+    -p 4000:4000 \
+    --link postgres_vinolien:postgres \
+    --name vinolien \
+		nsa/vinolien $*
+}
+
+elixir_bb(){
+  base_elixir sh
+}
+
+erlc(){
+  base_erl erlc $*
+}
+erl(){
+  base_erl erl $*
 }
 
 mix(){
@@ -169,6 +203,7 @@ elixir(){
 npm_elixir(){
   base_elixir npm $*
 }
+
 node_elixir(){
   base_elixir node $*
 }
@@ -177,8 +212,55 @@ iex(){
   base_elixir iex $*
 }
 
-phoenix(){
-  base_elixir phoenix $*
+elm(){
+  base_elixir elm $*
+}
+
+elm-reactor(){
+  base_elixir elm-reactor --address=0.0.0.0 $*
+}
+
+elm-make(){
+  base_elixir elm-make $*
+}
+
+elm-package(){
+  base_elixir elm-package $*
+}
+
+elm-repl(){
+  base_elixir elm-repl $*
+}
+
+heroku(){
+  docker run -it --rm \
+    -u `id -u`:`id -g` \
+    -v `pwd`:/appli \
+    -v /etc/passwd:/etc/passwd:ro \
+    -v /etc/group:/etc/group:ro \
+    -v ~/Project/heroku/fakehome:/home/nico \
+    --name heroku \
+    nsa/heroku-toolbelt heroku $*
+}
+
+heroku_bb(){
+  docker run -it --rm \
+    -u `id -u`:`id -g` \
+    -v `pwd`:/appli \
+    -v /etc/passwd:/etc/passwd:ro \
+    -v /etc/group:/etc/group:ro \
+    -v ~/Project/heroku/fakehome:/home/nico \
+    --name heroku \
+    --entrypoint /bin/bash \
+    nsa/heroku-toolbelt
+}
+
+heroku_bb_root(){
+  docker run -it --rm \
+    -v `pwd`:/appli \
+    -v ~/Project/perso/vinolien_cert/:/var/www/vinolien \
+    --entrypoint /bin/bash \
+    nsa/heroku-toolbelt
 }
 
 postgres_vinolien(){
@@ -187,8 +269,36 @@ postgres_vinolien(){
   docker run -d \
     -e POSTGRES_USER=postgres \
     -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/vinolien/pg-data:/var/lib/postgresql/data \
     --name postgres_vinolien \
     postgres
+}
+
+vinolien(){
+  docker run -it --rm \
+    -e POSTGRESQL_ADDON_URI="postgresql://postgres:postgres@postgres:5432/appli_dev" \
+    -e PORT="4000" \
+    -e SECRET_KEY_BASE="2UJP0mmVqzQbxXvz1ZRulehkeGFr0O5JuOPvtUsV08Dy5HYAMcY+yvKeNMpjQ6EA" \
+    --link postgres_vinolien:postgres \
+    --name vinolien \
+    -p 4000:4000 \
+    nsa/vinolien
+}
+
+webstorm(){
+	del_stopped webstorm
+
+	docker run --rm -it \
+		-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+    -v /etc/passwd:/etc/passwd \
+    -v ~/Project/Idea/fakehome:$HOME \
+    -v ~/Project/Idea/Project:/Project \
+    -e DISPLAY \
+    -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
+    -u $(id -u):$(id -g) \
+		--name webstorm \
+		nsa/intellij:webstorm
 }
 
 idea(){
@@ -384,6 +494,23 @@ torproxy(){
 		nsa/tor-proxy
 
 	hostess add torproxy "$(docker inspect --format '{{.NetworkSettings.Networks.bridge.IPAddress}}' torproxy)"
+}
+
+pompe_moi(){
+  domain=$1
+  root=$2
+  wget \
+       --recursive \
+       --no-clobber \
+       --page-requisites \
+       --html-extension \
+       --convert-links \
+       --restrict-file-names=windows \
+       --domains $domain \
+       --no-parent \
+       -e robots=off \
+          $root 
+
 }
 
 

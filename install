@@ -97,6 +97,9 @@ then
   cloneOrUpdate https://github.com/lambdatoast/elm.vim.git $BUNDLE_PATH elm.vim 
   cloneOrUpdate https://github.com/ekalinin/Dockerfile.vim.git $BUNDLE_PATH Dockerfile.vim
   cloneOrUpdate https://github.com/altercation/vim-colors-solarized.git $BUNDLE_PATH vim-colors-solarized
+ 
+  cloneOrUpdate https://github.com/vim-syntastic/syntastic.git $BUNDLE_PATH syntastic
+  cloneOrUpdate https://github.com/mtscout6/syntastic-local-eslint.vim $BUNDLE_PATH syntastic-local-eslint
 
   cloneOrUpdate https://github.com/jelera/vim-javascript-syntax.git $BUNDLE_PATH vim-javascript-syntax
   cloneOrUpdate https://github.com/pangloss/vim-javascript.git $BUNDLE_PATH vim-javascript
@@ -125,6 +128,7 @@ ln -fs $PWD/zsh/completions ~/.zsh/completions
 
 #i3
 ln -fs $PWD/i3/config ~/.config/i3/config
+ln -fs $PWD/i3/wallpaper.png ~/.config/i3/wallpaper.png
 ln -fs $PWD/i3/i3status.conf ~/.config/i3/i3status.conf
 ln -fs $PWD/i3/py3status.conf ~/.config/i3/py3status.conf
 ln -fs $PWD/i3/i3exit ~/.config/i3/i3exit
