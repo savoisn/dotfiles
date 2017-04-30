@@ -97,6 +97,7 @@ export TNU_SGDIR_ROOT_DIRECTORY=${TNU_ROOT_DIRECTORY}/sgdir/release/pepiniere-sg
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/bin/robomongo-1.0.0-rc1/bin
+export PATH=$PATH:~/bin/sonar-runner-2.4/bin
 export PATH=$PATH:~/Applications/mongodb/bin
 export PATH=$PATH:~/Applications/hub/bin
 export PATH=$PATH:~/Applications/lci/

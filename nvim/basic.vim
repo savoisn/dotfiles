@@ -445,13 +445,20 @@ nnoremap <leader><leader> <C-^>
 
 " Allow to copy/paste between VIM instances
 "copy the current visual selection to ~/.vbuf
-vmap <leader>y :w! ~/.vbuf<cr>
+vmap <leader><leader>y :w! ~/.vbuf<cr>
 
 "copy the current line to the buffer file if no visual selection
-nmap <leader>y :.w! ~/.vbuf<cr>
+nmap <leader><leader>y :.w! ~/.vbuf<cr>
 
 "paste the contents of the buffer file
-nmap <leader>p :r ~/.vbuf<cr>
+nmap <leader><leader>p :r ~/.vbuf<cr>
+
+map <Leader>y "+y
+map <Leader>p "+p
+
+vmap <C-c> "+y
+vmap <C-x> "+d
+imap <C-v> <esc>"+pA
 
 " map CTRL-L to piece-wise copying of the line above the current one
 imap <C-L> @@@<esc>hhkywjl?@@@<CR>P/@@@<cr>3s

@@ -30,6 +30,14 @@ Plug 'tomlion/vim-solidity'
 Plug 'leafgarland/typescript-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'lukerandall/haskellmode-vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'pbogut/deoplete-elm'
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'rust-lang/rust.vim'
+
+Plug 'jnurmine/Zenburn'
+
 
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
@@ -46,9 +54,79 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " Initialize plugin system
 call plug#end()
 
+colors zenburn
+
+let g:deoplete#enable_at_startup = 1
+
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+
+" omnifuncs
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
+
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+endif
+
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+
+let g:deoplete#sources#rust#racer_binary='/home/nico/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/nico/Project/rust/rust/src/'
+let g:deoplete#sources#rust#documentation_max_height=20
+
+"use <tab> for completion
+function! TabWrap()
+    if pumvisible()
+        return "\<C-N>"
+    elseif strpart( getline('.'), 0, col('.') - 1 ) =~ '^\s*$'
+        return "\<tab>"
+    elseif &omnifunc !~ ''
+        return "\<C-X>\<C-O>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
+
+" power tab
+imap <silent><expr><tab> TabWrap()
+
+" Enter: complete&close popup if visible (so next Enter works); else: break undo
+inoremap <silent><expr> <Cr> pumvisible() ?
+            \ deoplete#mappings#close_popup() : "<C-g>u<Cr>"
+
+" Ctrl-Space: summon FULL (synced) autocompletion
+inoremap <silent><expr> <C-Space> deoplete#mappings#manual_complete()
+
+" Escape: exit autocompletion, go to Normal mode
+inoremap <silent><expr> <Esc> pumvisible() ? "<C-e><Esc>" : "<Esc>"
+
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <C-n> :NERDTreeToggle<CR>
 map <C-i> :NERDTreeFind<CR>
