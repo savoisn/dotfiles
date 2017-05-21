@@ -124,15 +124,28 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# audio controls
-bindsym XF86AudioRaiseVolume exec amixer set Master 5+ #increase sound volume
-bindsym XF86AudioLowerVolume exec amixer set Master 5- #decrease sound volume
-bindsym XF86AudioMute exec amixer set Master 0 # mute sound
-bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 # screen brightness controls
-bindsym XF86MonBrightnessUp exec sudo light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo light -U 5 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec sudo light -A 5 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec sudo light -U 5 # decrease screen brightness
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -187,6 +200,9 @@ bindsym $mod+u mode "$mode_mount"
 
 exec_always --no-startup-id bin/i3startup
 exec --no-startup-id feh --bg-scale $HOME/.config/i3/wallpaper.png
+
+exec "setxkbmap -layout us,fr -option 'grp:alt_shift_toggle'"
+
 
 # Start i4bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

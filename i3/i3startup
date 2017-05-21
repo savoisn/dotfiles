@@ -2,6 +2,7 @@
 
 setxkbmap -model pc105 -layout us,fr -option grp:alt_shift_toggle
 
-touchpad_id=$(xinput --list  | grep Synaptics | cut -d"=" -f2 | cut -f1)
-xinput --set-prop $touchpad_id "Synaptics Two-Finger Scrolling" 1 1
+touchpad_id=$(xinput list  | grep Synaptics | cut -d"=" -f2 | cut -f1)
+xinput set-prop $touchpad_id "Synaptics Two-Finger Scrolling" 1 1
+xinput set-prop $touchpad_id 272 1
 

@@ -23,6 +23,19 @@ bright_down(){
 
 export DOCKER_REPO_PREFIX="nsa"
 
+dcFullRestart(){
+  if [[ $# != 1 ]]; then
+    echo "need 1 param for service to Full Restart"
+    return 1
+  fi
+	local service_name=$1
+  dc stop $service_name
+  dc rm -vf $service_name
+  dc up -d $service_name
+  sleep 3
+  dc logs $service_name
+}
+
 dcleanup(){
 	local containers
 	containers=( $(docker ps -aq 2>/dev/null) )
@@ -70,6 +83,7 @@ atom(){
 		--name atom \
 		nsa/atom
 }
+
 
 catimg(){
   docker run -it --rm nsa/catimg
@@ -494,6 +508,20 @@ torproxy(){
 		nsa/tor-proxy
 
 	hostess add torproxy "$(docker inspect --format '{{.NetworkSettings.Networks.bridge.IPAddress}}' torproxy)"
+}
+
+vscode(){
+	del_stopped vscode
+	docker run -d \
+		-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+		-v /dev/shm:/dev/shm \
+		-v $HOME:$HOME \
+    -v /etc/passwd:/etc/passwd \
+		-e DISPLAY \
+    -e "HOME:${HOME}" \
+    -u $(id -u):$(id -g) \
+		--name vscode \
+		nsa/vscode
 }
 
 pompe_moi(){

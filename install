@@ -24,11 +24,15 @@ function cloneOrUpdate () {
 
 }
 
+function usage () {
+  echo "My usage"
+}
+
 BUNDLE_PATH=~/.vim/bundle
 
 
 WITH_LINKS="false"
-while getopts ":wi" opt; do
+while getopts ":hwi" opt; do
   case $opt in
     w)
       WITH_LINKS="true" 
@@ -44,6 +48,8 @@ done
 mkdir -p ~/.vim/
 mkdir -p ~/.zsh/
 mkdir -p ~/.config/i3
+mkdir -p ~/.config/nvim
+mkdir -p ~/bin
 
 if [[ $WITH_INSTALL == "true" ]]
 then
@@ -132,4 +138,8 @@ ln -fs $PWD/i3/wallpaper.png ~/.config/i3/wallpaper.png
 ln -fs $PWD/i3/i3status.conf ~/.config/i3/i3status.conf
 ln -fs $PWD/i3/py3status.conf ~/.config/i3/py3status.conf
 ln -fs $PWD/i3/i3exit ~/.config/i3/i3exit
+ln -fs $PWD/i3/i3exit ~/bin/i3exit
+ln -fs $PWD/i3/i3startup ~/bin/i3startup
 
+#nvim
+ln -fs $PWD/nvim ~/.config/nvim
