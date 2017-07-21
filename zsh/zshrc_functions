@@ -195,56 +195,56 @@ runAlpinePhoenix(){
 		nsa/vinolien $*
 }
 
-elixir_bb(){
-  base_elixir sh
-}
+#elixir_bb(){
+  #base_elixir sh
+#}
 
-erlc(){
-  base_erl erlc $*
-}
-erl(){
-  base_erl erl $*
-}
+#erlc(){
+  #base_erl erlc $*
+#}
+#erl(){
+  #base_erl erl $*
+#}
 
-mix(){
-  base_elixir mix $*
-}
+#mix(){
+  #base_elixir mix $*
+#}
 
-elixir(){
-  base_elixir elixir $*
-}
+#elixir(){
+  #base_elixir elixir $*
+#}
 
-npm_elixir(){
-  base_elixir npm $*
-}
+#npm_elixir(){
+  #base_elixir npm $*
+#}
 
-node_elixir(){
-  base_elixir node $*
-}
+#node_elixir(){
+  #base_elixir node $*
+#}
 
-iex(){
-  base_elixir iex $*
-}
+#iex(){
+  #base_elixir iex $*
+#}
 
-elm(){
-  base_elixir elm $*
-}
+#elm(){
+  #base_elixir elm $*
+#}
 
-elm-reactor(){
-  base_elixir elm-reactor --address=0.0.0.0 $*
-}
+#elm-reactor(){
+  #base_elixir elm-reactor --address=0.0.0.0 $*
+#}
 
-elm-make(){
-  base_elixir elm-make $*
-}
+#elm-make(){
+  #base_elixir elm-make $*
+#}
 
-elm-package(){
-  base_elixir elm-package $*
-}
+#elm-package(){
+  #base_elixir elm-package $*
+#}
 
-elm-repl(){
-  base_elixir elm-repl $*
-}
+#elm-repl(){
+  #base_elixir elm-repl $*
+#}
 
 heroku(){
   docker run -it --rm \
@@ -541,7 +541,6 @@ pompe_moi(){
 
 }
 
-
 mirror-display(){
   if [[ $# != 1 ]]; then
     echo "need 1 param for monitor name"
@@ -549,23 +548,24 @@ mirror-display(){
   fi
 	local monitor_name=$1
   echo $monitor_name
-
-	#xrandr --newmode "3840x2160_30.00"  338.75  3840 4080 4488 5136  2160 2163 2168 2200 -hsync +vsync
-	#xrandr --addmode  DP1 "3840x2160_30.00"
-	#xrandr --output eDP1 --auto --primary --output DP1 --mode 3840x2160_30.00 --above eDP1 --rate 30
-
-  #xrandr --newmode "1024x768_safe" 65.00 1024 1048 1184 1344 768 771 777 806 -HSync -VSync
-  #xrandr --addmode VGA1 "1024x768_safe"
-  
-  #xrandr --newmode "1920x1080-default"   138.70   1920 1968 2000 2080   1080 1083 1088 1111 +hsync -vsync
-  #xrandr --addmode eDP1 "1920x1080-default"
   
   xrandr --output eDP1 --auto --primary --output $monitor_name --auto --same-as eDP1
   retour=$?
-  echo $retour
   return $retour
 }
 
+extend-display(){
+  if [[ $# != 1 ]]; then
+    echo "need 1 param for monitor name"
+    return 1
+  fi
+	local monitor_name=$1
+  echo $monitor_name
+
+  xrandr --output eDP1 --auto --primary --output $monitor_name --auto --right-of eDP1
+  retour=$?
+  return $retour
+}
 
 shutdown-display(){
   if [[ $# != 1 ]]; then
