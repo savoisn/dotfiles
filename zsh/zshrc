@@ -153,3 +153,11 @@ source ~/.zshrc_functions
 [[ -s "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 [[ -s /home/nico/.rsvm/rsvm.sh ]] && . /home/nico/.rsvm/rsvm.sh # This loads RSVM
+
+if [ -f ~/.config/exercism/exercism_completion.zsh ]; then
+  . ~/.config/exercism/exercism_completion.zsh
+fi
+
+# tabtab source for jhipster package
+# uninstall by removing these lines or running `tabtab uninstall jhipster`
+[[ -f /home/nico/.nvm/versions/node/v6.10.2/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /home/nico/.nvm/versions/node/v6.10.2/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh

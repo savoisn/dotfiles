@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/nico/.config/nvim'
+let g:netrw_dirhist_2='/home/nico/.config'
+let g:netrw_dirhist_3='/home/nico/Projects/elixir/helloVueJs/deps'
+let g:netrw_dirhist_4='/home/nico/Projects/elixir/helloVueJs'
+let g:netrw_dirhist_5='/home/nico/Projects/elixir/helloVueJs/config'
+let g:netrw_dirhist_6='/home/nico/Projects/elixir/helloVueJs/deps'

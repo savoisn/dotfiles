@@ -541,6 +541,16 @@ pompe_moi(){
 
 }
 
+cdc(){
+  if [[ $# != 1 ]]; then
+    echo "need 1 param for folder to create and move to"
+    return 1
+  fi
+  local folder=$1
+  mkdir $1
+  cd $1
+}
+
 mirror-display(){
   if [[ $# != 1 ]]; then
     echo "need 1 param for monitor name"
@@ -552,6 +562,11 @@ mirror-display(){
   xrandr --output eDP1 --auto --primary --output $monitor_name --auto --same-as eDP1
   retour=$?
   return $retour
+}
+
+watchElixir(){
+
+  watchmedo shell-command --patterns="*.exs;*.ex;*.txt;*.json" --recursive --command="elixir *_test*" -W .
 }
 
 extend-display(){

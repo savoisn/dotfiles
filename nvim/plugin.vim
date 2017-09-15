@@ -12,34 +12,40 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
+" language and librairies
 Plug 'elixir-lang/vim-elixir'
 Plug 'lambdatoast/elm.vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-erlang/vim-erlang-runtime'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'lukerandall/haskellmode-vim'
+Plug 'flowtype/vim-flow'
+Plug 'rust-lang/rust.vim'
+Plug 'posva/vim-vue'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
+" vim tools
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+
+" code tooling formating complete
+Plug 'sbdchd/neoformat'
+Plug 'vim-syntastic/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
-Plug 'tomlion/vim-solidity'
 Plug 'leafgarland/typescript-vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'lukerandall/haskellmode-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'pbogut/deoplete-elm'
 Plug 'sebastianmarkow/deoplete-rust'
-Plug 'rust-lang/rust.vim'
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'jeetsukumaran/vim-buffergator'
 
+
+" Color
 Plug 'jnurmine/Zenburn'
-
-
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 Plug 'fatih/vim-go', { 'tag': '*' }
@@ -50,13 +56,23 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-
 " Initialize plugin system
 call plug#end()
 
 colors zenburn
 
+let g:buffergator_viewport_split_policy = "B"
+
 let g:deoplete#enable_at_startup = 1
+
+let g:neoformat_elixir_exfmt = {
+  \ 'exe': 'mix',
+  \ 'args': ['exfmt', '--stdin'],
+  \ 'stdin': 1
+  \ }
+
+let g:neoformat_enabled_elixir = ['exfmt']
+
 
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
