@@ -277,6 +277,30 @@ heroku_bb_root(){
     nsa/heroku-toolbelt
 }
 
+postgres_ueberauth(){
+
+	del_stopped postgres_ueberauth
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/ueberauth/pg-data:/var/lib/postgresql/data \
+    --name postgres_ueberauth \
+    postgres
+}
+
+postgres_trombi(){
+
+	del_stopped postgres_trombi
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/trombi/pg-data:/var/lib/postgresql/data \
+    --name postgres_trombi \
+    postgres
+}
+
 postgres_vinolien(){
 
 	del_stopped postgres_vinolien
@@ -377,7 +401,7 @@ mdp(){
   docker run -it \
 		-v /etc/localtime:/etc/localtime:ro \
 		-v /etc/machine-id:/etc/machine-id:ro \
-		-v "${HOME}/Project/perso/prez/docker-on-desktop":/data \
+		-v "${PWD}":/data \
     -v /etc/passwd:/etc/passwd \
     -e "HOME" \
     -u $(id -u):$(id -g) \

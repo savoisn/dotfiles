@@ -25,6 +25,7 @@ autoload -U colors
 colors
 
 export TERM=xterm-256color
+export EDITOR=nvim
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
@@ -99,7 +100,7 @@ export PATH=$PATH:~/bin
 export PATH=$PATH:~/bin/robomongo-1.0.0-rc1/bin
 export PATH=$PATH:~/bin/sonar-runner-2.4/bin
 export PATH=$PATH:~/Applications/mongodb/bin
-export PATH=$PATH:~/Applications/hub/bin
+export PATH=$PATH:~/bin/hub/bin
 export PATH=$PATH:~/Applications/lci/
 export PATH=$PATH:~/Applications/gitflow/bin
 export PATH=$PATH:~/Applications/docker-compose

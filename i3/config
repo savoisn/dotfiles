@@ -188,6 +188,9 @@ mode "$mode_system" {
 }
 bindsym $mod+End mode "$mode_system"
 
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+bindsym Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+
 
 set $mode_mount Mount (m) mount, (u) umount
 mode "$mode_mount" {
@@ -208,7 +211,9 @@ exec "setxkbmap -layout us,fr -option 'grp:alt_shift_toggle'"
 # finds out, if available)
 bar {
         #status_command i3status --config ~/.config/i3/i3status.conf
-        status_command py3status --config ~/.config/i3/py3status.conf
+        #status_command py3status --config ~/.config/i3/py3status.conf
+	status_command python ~/.config/i3/i3pystatus-conf.py
+	workspace_buttons yes
         tray_output primary
 }
 

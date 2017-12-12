@@ -7,6 +7,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 map <C-n> :NERDTreeToggle<CR>
 map <C-i> :NERDTreeFind<CR>
 
+let g:ctrlp_cmd = 'CtrlPMRU'
 let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|cache|node_modules|bower_components|venv|wp-admin|wp-includes)[\/]'
 
 

@@ -5,6 +5,7 @@ HOME
 SGDIR
 GO
 JHIPSTER
+TROMBI
 "
 
 usage(){
@@ -22,6 +23,8 @@ fi
 
 PROFILE=$1
 
+echo $PROFILE
+
 SESSION="ide-session-$1"
 
 echo "creating tmux session $SESSION"
@@ -35,8 +38,6 @@ then
   tmux -2 attach-session -d -t $SESSION
   exit 0
 fi
-
-echo "Coucou"
 
 tmux -2 new-session -d -s $SESSION
 
@@ -54,9 +55,7 @@ tmux split-window -v
 tmux new-window -t $SESSION:2 -n 'Vim' 
 tmux split-window -h
 tmux split-window -v
-tmux resize-pane -t 1 -x 90
-
-# Set default window
+tmux resize-pane -t 1 -x 90 # Set default window
 tmux select-window -t $SESSION:1
 
 if [[ "$PROFILE" == "popartisan" || "$PROFILE" == "pop" || "$PROFILE" == "POPARTISAN" || "$PROFILE" == "POP" ]]
@@ -71,6 +70,30 @@ then
   tmux send-keys "" C-m
   tmux select-pane -t 2
   tmux send-keys "" C-m
+elif [[ "$PROFILE" == "trombi" || "$PROFILE" == "TROMBI" ]]
+then
+  tmux select-window -t $SESSION:1
+  tmux select-pane -t 2
+  tmux send-keys "g trombi" C-m
+  tmux select-window -t $SESSION:2
+  tmux rename-window -t $SESSION:2 'Elixir'
+  tmux select-pane -t 0
+  tmux send-keys "g trombi && nvim" C-m
+  tmux select-pane -t 1
+  tmux send-keys "g trombi" C-m
+  tmux select-pane -t 2
+  tmux send-keys "g trombi" C-m
+  tmux new-window -t $SESSION:3 -n 'Vuejs' 
+  tmux split-window -h
+  tmux split-window -v
+  tmux select-pane -t 0
+  tmux send-keys "g trombi && nvim" C-m
+  tmux resize-pane -t 1 -x 90 # Set default window
+  tmux select-pane -t 1
+  tmux send-keys "g trombi" C-m
+  tmux select-pane -t 2
+  tmux send-keys "g trombi" C-m
+  tmux select-window -t $SESSION:1
 elif [[ "$PROFILE" == "SGDIR" || "$PROFILE" == "sgdir" ]]
 then
   exports="export PYTHONPATH=$PYTHONPATH:$HOME/Workspace/www/sgdir/releases/pepiniere-sgdir/venv/lib/python2.7/site-packages:$HOME/Workspace/www/sgdir/current/new_scripts"
