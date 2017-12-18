@@ -97,6 +97,7 @@ export TNU_ROOT_DIRECTORY=~/Project/fastit/aws/
 export TNU_SGDIR_ROOT_DIRECTORY=${TNU_ROOT_DIRECTORY}/sgdir/release/pepiniere-sgdir
 
 export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin/clever-cloud
 export PATH=$PATH:~/bin/robomongo-1.0.0-rc1/bin
 export PATH=$PATH:~/bin/sonar-runner-2.4/bin
 export PATH=$PATH:~/Applications/mongodb/bin
@@ -112,8 +113,6 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Project/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
-export AWS_ACCESS_KEY_ID='AKIAIHUWFOV5N5VNDCZA'
-export AWS_SECRET_ACCESS_KEY='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'
 
 
 export GATLING_HOME=$HOME/Applications/gatling
@@ -128,6 +127,7 @@ alias vis="vim --servername VI "
 alias go_watch_test='watchmedo shell-command --patterns="*.go;*.txt;*.json" --recursive --command="go test" -W .'
 alias git=hub
 alias dc=docker-compose
+alias clever='LD_PRELOAD=libcurl.so.3 clever'
 
 
 export NVM_DIR="$HOME/.nvm"
