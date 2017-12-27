@@ -330,10 +330,11 @@ webstorm(){
 	docker run --rm -it \
 		-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
     -v /etc/passwd:/etc/passwd \
-    -v ~/Project/Idea/fakehome:$HOME \
-    -v ~/Project/Idea/Project:/Project \
+    -v ~/Projects/Idea/fakehome:/home/nico/ \
+    -v ~/Projects/Idea/Project:/Project \
     -e DISPLAY \
     -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
+    -e "HOME=/home/nico" \
     -u $(id -u):$(id -g) \
 		--name webstorm \
 		nsa/intellij:webstorm
@@ -343,15 +344,16 @@ idea(){
 	del_stopped idea
 
 	docker run -d \
-		-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+	-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
     -v /etc/passwd:/etc/passwd \
-    -v ~/Project/Idea/fakehome:$HOME \
-    -v ~/Project/Idea/Project:/Project \
+    -v ~/Projects/Idea/fakehome:/home/nico \
+    -v ~/Projects/Idea/Project:/Project \
     -e DISPLAY \
     -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
+    -e "HOME=/Nico" \
     -u $(id -u):$(id -g) \
-		--name idea \
-		nsa/intellij:idea
+    --name idea \
+    nsa/intellij:idea
 }
 
 hangups(){
