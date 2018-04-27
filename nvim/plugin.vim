@@ -25,9 +25,11 @@ Plug 'pangloss/vim-javascript'
 Plug 'vim-erlang/vim-erlang-runtime'
 Plug 'lukerandall/haskellmode-vim'
 Plug 'flowtype/vim-flow'
+Plug 'digitaltoad/vim-pug'
 Plug 'rust-lang/rust.vim'
 Plug 'posva/vim-vue'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'tomlion/vim-solidity'
 
 " formating
 Plug 'sbdchd/neoformat'
@@ -69,21 +71,23 @@ map <leader>b :BuffergatorToggle<cr>
 " Color
 Plug 'jnurmine/Zenburn'
 
+let g:elm_format_autosave = 1
+
 
 call plug#end()                                                                 
-
 filetype plugin on                                                              
+set omnifunc=syntaxcomplete#Complete
 
 if (has_key(g:plugs, 'Zenburn') > 0)
     colors zenburn
 endif
-set background=dark                                                             
-                                                                                
-" Text options                                                                  
-set expandtab                                                                   
-set shiftwidth=4                                                                
-set softtabstop=4                                                               
-set tabstop=4                                                                   
-set smarttab                                                                    
-                                                                                
+set background=dark
+
+" Text options
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set smarttab
+
 set runtimepath^=~/.vim/plugged/vim-erlang-runtime/

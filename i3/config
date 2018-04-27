@@ -105,6 +105,10 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
+# previous / next workspace
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -188,8 +192,8 @@ mode "$mode_system" {
 }
 bindsym $mod+End mode "$mode_system"
 
-bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
-bindsym Shift+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
+bindsym Print exec shutter -s -e
+bindsym Shift+Print exec shutter -s -e
 
 
 set $mode_mount Mount (m) mount, (u) umount

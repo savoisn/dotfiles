@@ -289,6 +289,50 @@ postgres_ueberauth(){
     postgres
 }
 
+postgres_cina(){
+
+	del_stopped postgres_cina
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/cina/pg-data:/var/lib/postgresql/data \
+    --name postgres_cina \
+    postgres
+}
+postgres_wob(){
+
+	del_stopped postgres_wob
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/wob/pg-data:/var/lib/postgresql/data \
+    --name postgres_wob \
+    postgres
+}
+postgres_gs1(){
+
+	del_stopped postgres_gs1
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/gs1/pg-data:/var/lib/postgresql/data \
+    --name postgres_gs1 \
+    postgres
+}
+postgres_castle(){
+
+	del_stopped postgres_castle
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/castle/pg-data:/var/lib/postgresql/data \
+    --name postgres_castle \
+    postgres
+}
 postgres_trombi(){
 
 	del_stopped postgres_trombi
@@ -408,7 +452,7 @@ mdp(){
     -e "HOME" \
     -u $(id -u):$(id -g) \
     --name mdp \
-    nsa/mdp "/data/${file}"
+    nsa/mdp:v0.2 "/data/${file}"
 }
 
 mutt(){
@@ -617,6 +661,26 @@ shutdown-display(){
   xrandr --output eDP1 --auto --output $monitor_name --off
 }
 
+cassandra_demo(){
+  container_name="cassandra_demo"
+
+	del_stopped $container_name
+  docker run -d \
+    --name $container_name \
+    -p 9042:9042 \
+    -p 7199:7199 \
+    -v $HOME/tmp/$container_anem:/var/lib/cassandra \
+    cassandra:2.1.20
+}
+
+cqlsh(){
+
+  linked_container_name="cassandra_demo"
+  container_name="cassandra_demo_cqlsh"
 
 
-
+  docker run -it --rm \
+    --link cassandra_demo:cassandra \
+    cassandra:2.1.20 \
+    cqlsh cassandra
+}

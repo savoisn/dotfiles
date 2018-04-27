@@ -54,11 +54,11 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #
-plugins=(git hub gulp npm nvm go jump docker docker-compose asdf)
+plugins=(git hub gulp npm nvm go jump docker docker-compose asdf mix)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+export PATH=$PATH:"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH=~/.cabal/bin:/opt/cabal/1.22/bin:/opt/ghc/7.10.3/bin:$PATH
 export PATH=~/.local/bin:$PATH
@@ -98,14 +98,20 @@ export TNU_SGDIR_ROOT_DIRECTORY=${TNU_ROOT_DIRECTORY}/sgdir/release/pepiniere-sg
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/bin/clever-cloud
+export PATH=$PATH:~/bin/purescript
 export PATH=$PATH:~/bin/robomongo-1.0.0-rc1/bin
 export PATH=$PATH:~/bin/sonar-runner-2.4/bin
 export PATH=$PATH:~/Applications/mongodb/bin
 export PATH=$PATH:~/bin/hub/bin
+export PATH=$PATH:~/bin/sbt/bin
 export PATH=$PATH:~/Applications/lci/
 export PATH=$PATH:~/Applications/gitflow/bin
 export PATH=$PATH:~/Applications/docker-compose
 export PATH=$PATH:~/Applications/packer
+
+export PATH=$PATH:~/.asdf/installs/elixir/1.5.1/.mix/
+export PATH=$PATH:$HOME/.meteor
+
 
 
 export GOROOT=$HOME/bin/go
@@ -163,3 +169,7 @@ fi
 # tabtab source for jhipster package
 # uninstall by removing these lines or running `tabtab uninstall jhipster`
 [[ -f /home/nico/.nvm/versions/node/v6.10.2/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh ]] && . /home/nico/.nvm/versions/node/v6.10.2/lib/node_modules/generator-jhipster/node_modules/tabtab/.completions/jhipster.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/bin/sdkman"
+[[ -s "$HOME/bin/sdkman/bin/sdkman-init.sh" ]] && source "$HOME/bin/sdkman/bin/sdkman-init.sh"
