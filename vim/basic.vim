@@ -159,6 +159,10 @@ if has("gui_running")
     set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -228,6 +232,11 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>
@@ -464,4 +473,6 @@ noremap <leader>inc <C-A>
 
 nnoremap <C-S> yiw:%s/\<<C-r>"\>/<C-r>"/gc<Left><Left><Left>
 vnoremap <C-S> y:%s/\<<C-r>"\>/<C-r>"/gc<Left><Left><Left>
+
+cd /home/nico/Projects
 

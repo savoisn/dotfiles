@@ -98,12 +98,16 @@ export TNU_SGDIR_ROOT_DIRECTORY=${TNU_ROOT_DIRECTORY}/sgdir/release/pepiniere-sg
 
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/bin/clever-cloud
+export PATH=$PATH:~/bin/hugo
+export PATH=$PATH:~/bin/gatling/bin
 export PATH=$PATH:~/bin/purescript
 export PATH=$PATH:~/bin/robomongo-1.0.0-rc1/bin
 export PATH=$PATH:~/bin/sonar-runner-2.4/bin
+export PATH=$PATH:~/bin/caddy
 export PATH=$PATH:~/Applications/mongodb/bin
 export PATH=$PATH:~/bin/hub/bin
-export PATH=$PATH:~/bin/sbt/bin
+export PATH=$PATH:~/bin/VSCode
+export PATH=$PATH:~/bin/arduino
 export PATH=$PATH:~/Applications/lci/
 export PATH=$PATH:~/Applications/gitflow/bin
 export PATH=$PATH:~/Applications/docker-compose
@@ -119,10 +123,6 @@ export PATH=$PATH:$GOROOT/bin
 export GOPATH=$HOME/Project/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
-
-
-export GATLING_HOME=$HOME/Applications/gatling
-
 
 alias g="jump"
 alias m="bookmark"
@@ -151,6 +151,8 @@ drbb () {
 source ~/.zshrc_alias
 source ~/.zshrc_functions
 source ~/.config/api_keys
+
+source /etc/profile.d/snapd.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"

@@ -277,6 +277,32 @@ heroku_bb_root(){
     nsa/heroku-toolbelt
 }
 
+postgres_ask_us_anything(){
+
+	del_stopped postgres_ask_us_anything
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/ueberauth/pg-data:/var/lib/postgresql/data \
+    --name postgres_ask_us_anything \
+    postgres
+}
+
+
+postgres_direct_energie(){
+
+	del_stopped postgres_direct_energie
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/10-DE/pg-data:/var/lib/postgresql/data \
+    -v $HOME/Projects/Direct_Energie/benchmark-faker/output:/home/nico/Projects/Direct_Energie/benchmark-faker/output/ \
+    --name postgres_direct_energie \
+    postgres:10.4
+}
+
 postgres_ueberauth(){
 
 	del_stopped postgres_ueberauth
@@ -388,13 +414,13 @@ idea(){
 	del_stopped idea
 
 	docker run -d \
-	-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/ \
     -v /etc/passwd:/etc/passwd \
     -v ~/Projects/Idea/fakehome:/home/nico \
     -v ~/Projects/Idea/Project:/Project \
     -e DISPLAY \
     -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
-    -e "HOME=/Nico" \
+    -e "HOME=/home/nico" \
     -u $(id -u):$(id -g) \
     --name idea \
     nsa/intellij:idea

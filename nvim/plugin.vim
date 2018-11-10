@@ -7,14 +7,15 @@ Plug 'junegunn/vim-easy-align'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " languages and librairies
-Plug 'vim-erlang/vim-erlang-compiler'                                           
-Plug 'vim-erlang/vim-erlang-skeletons'                                          
-Plug 'vim-erlang/vim-erlang-runtime'                                            
-Plug 'vim-erlang/vim-erlang-omnicomplete'                                       
-Plug 'vim-erlang/vim-erlang-tags'                                               
-                                                                                
-Plug 'elixir-lang/vim-elixir'                                                   
-Plug 'slashmili/alchemist.vim'                                                  
+Plug 'ballerina-attic/plugin-vim'
+Plug 'vim-erlang/vim-erlang-compiler'
+Plug 'vim-erlang/vim-erlang-skeletons'
+Plug 'vim-erlang/vim-erlang-runtime'
+Plug 'vim-erlang/vim-erlang-tags'
+
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
+Plug 'slashmili/alchemist.vim'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'c-brenn/phoenix.vim'
 
@@ -31,20 +32,11 @@ Plug 'posva/vim-vue'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'tomlion/vim-solidity'
 
-" formating
-Plug 'sbdchd/neoformat'
-
-let g:neoformat_elixir_exfmt = {
-  \ 'exe': 'mix',
-  \ 'args': ['exfmt', '--stdin'],
-  \ 'stdin': 1
-  \ }
-
-let g:neoformat_enabled_elixir = ['exfmt']
 
 "Plug 'vim-syntastic/syntastic'
 "Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
                                                                                 
 " vim tools
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -74,9 +66,19 @@ Plug 'jnurmine/Zenburn'
 let g:elm_format_autosave = 1
 
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+let g:deoplete#enable_at_startup = 1
+
+
 call plug#end()                                                                 
 filetype plugin on                                                              
-set omnifunc=syntaxcomplete#Complete
 
 if (has_key(g:plugs, 'Zenburn') > 0)
     colors zenburn

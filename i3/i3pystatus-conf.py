@@ -1,5 +1,12 @@
 from i3pystatus import Status
 
+# import sys
+# import os
+
+# sys.path.append(os.path.abspath("/home/nico/Projects/python/"))
+
+from MyKeyboardI3Status import MyKeyboard
+
 status = Status()
 
 # Displays clock like this:
@@ -11,8 +18,6 @@ status.register("clock",
 # Shows the average load of the last minute and the last 5 minutes
 # (the default value for format is used)
 status.register("load")
-status.register("pomodoro",
-        sound="/home/nico/Projects/dotfiles/i3/coins.wav",)
 
 
 # Shows your CPU temperature, if you have a Intel CPU
@@ -97,8 +102,12 @@ status.register("mpd",
         "stop": "◾",
     },)
 
-status.register("backlight", interval=100,)
-status.register("xkblayout")
+# status.register("backlight", interval=100,)
 
+# status.register("xkblayout",
+    # format="\u2328 {num}",
+    # layouts=["US", "FR"],)
+
+status.register(MyKeyboard)
 
 status.run()
