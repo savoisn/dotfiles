@@ -12,6 +12,12 @@ status = Status()
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
+
+status.register(MyKeyboard)
+
+status.register("keyboard_locks",
+        format="{caps}")
+
 status.register("clock",
     format="%a %-d %b %X KW%V",)
 
@@ -62,6 +68,7 @@ status.register("runwatch",
     name="DHCP",
     path="/var/run/dhclient*.pid",)
 
+
 # Shows the address and up/down state of eth0. If it is up the address is shown in
 # green (the default value of color_up) and the CIDR-address is shown
 # (i.e. 10.10.10.42/24).
@@ -77,7 +84,6 @@ status.register("network",
 status.register("network",
     interface="wlan0",
     format_up="{essid} {quality:03.0f}%",)
-
 # Shows disk usage of /
 # Format:
 # 42/128G [86G]
@@ -91,23 +97,7 @@ status.register("disk",
 status.register("pulseaudio",
     format="♪{volume}",)
 
-# Shows mpd status
-# Format:
-# Cloud connected▶Reroute to Remain
-status.register("mpd",
-    format="{title}{status}{album}",
-    status={
-        "pause": "▷",
-        "play": "▶",
-        "stop": "◾",
-    },)
-
-# status.register("backlight", interval=100,)
-
-# status.register("xkblayout",
-    # format="\u2328 {num}",
-    # layouts=["US", "FR"],)
-
-status.register(MyKeyboard)
+status.register("pomodoro",
+        sound="/home/nico/Projects/dotfiles/i3/coins.wav")
 
 status.run()
