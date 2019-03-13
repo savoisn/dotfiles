@@ -89,7 +89,7 @@ catimg(){
   docker run -it --rm nsa/catimg
 }
 
-chrome(){
+chrome_in_docker(){
 	# add flags for proxy if passed
 	local proxy=
 	local map
@@ -277,6 +277,18 @@ heroku_bb_root(){
     nsa/heroku-toolbelt
 }
 
+postgres_elixir_workshop(){
+
+	del_stopped postgres_elixir_workshop
+  docker run -d \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgres \
+    -p 5432:5432 \
+    -v $HOME/tmp/docker-data/elixir_workshop/pg-data:/var/lib/postgresql/data \
+    --name postgres_elixir_workshop \
+    postgres:11.1
+}
+
 postgres_ask_us_anything(){
 
 	del_stopped postgres_ask_us_anything
@@ -401,7 +413,7 @@ webstorm(){
 		-v /tmp/.X11-unix/:/tmp/.X11-unix/ \
     -v /etc/passwd:/etc/passwd \
     -v ~/Projects/Idea/fakehome:/home/nico/ \
-    -v ~/Projects/Idea/Project:/Project \
+    -v ~/Projects/Idea/Projects:/home/nico/Projects \
     -e DISPLAY \
     -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
     -e "HOME=/home/nico" \
@@ -410,20 +422,135 @@ webstorm(){
 		nsa/intellij:webstorm
 }
 
-idea(){
-	del_stopped idea
+idea201831(){
+	del_stopped idea201831
+  relies_on myrabbit
 
 	docker run -d \
     -v /tmp/.X11-unix/:/tmp/.X11-unix/ \
     -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
     -v ~/Projects/Idea/fakehome:/home/nico \
-    -v ~/Projects/Idea/Project:/Project \
+    -v ~/Projects/Idea/Projects:/home/nico/Projects \
+    --link myrabbit:myrabbit \
+    -p 8080:8080 \
+    -p 3000:3000 \
+    -p 4000:4000 \
+    -e DISPLAY \
+    -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
+    -e "HOME=/home/nico" \
+    -u $(id -u):$(id -g) \
+    --name idea201831 \
+    nsa/intellij:idea201831
+}
+idea201834(){
+	del_stopped idea201834
+  relies_on myrabbit
+
+	docker run -d \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+    -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
+    -v ~/Projects/Idea/fakehome:/home/nico \
+    -v ~/Projects/Idea/Projects:/home/nico/Projects \
+    --link myrabbit:myrabbit \
+    -p 8080:8080 \
+    -p 8081:8081 \
+    -p 8082:8082 \
+    -p 8083:8083 \
+    -p 3000:3000 \
+    -p 4000:4000 \
+    -e DISPLAY \
+    -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
+    -e "HOME=/home/nico" \
+    -u $(id -u):$(id -g) \
+    --name idea201834 \
+    nsa/intellij:idea201834
+}
+idea(){
+	del_stopped idea
+  relies_on myrabbit
+
+	docker run -d \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+    -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
+    -v ~/Projects/Idea/fakehome:/home/nico \
+    -v ~/Projects/Idea/Projects:/home/nico/Projects \
+    --link myrabbit:myrabbit \
+    -p 8080:8080 \
+    -p 3000:3000 \
+    -p 4000:4000 \
     -e DISPLAY \
     -e "JAVA_HOME=/usr/bin/jvm/java-8-oracle" \
     -e "HOME=/home/nico" \
     -u $(id -u):$(id -g) \
     --name idea \
     nsa/intellij:idea
+}
+
+skype-docker(){
+	del_stopped skype
+  docker run -d \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $HOME/.Skype:/home/skype/.Skype \
+    -e DISPLAY \
+    --link pulseaudio:pulseaudio \
+    -e PULSE_SERVER=pulseaudio \
+    --device /dev/video0 \
+    --name skype \
+    nsa/skype:1.0
+}
+slack(){
+	del_stopped slack
+
+	docker run -d \
+    -v /var/run/dbus:/var/run/dbus \
+    -v /run/user/1000/bus:/run/user/1000/bus \
+    -v ~/.dbus/:/home/nico/.dbus/ \
+		-v "${HOME}/.Xauthority:$HOME/.Xauthority" \
+		-v "/var/run/user/$(id -u):/var/run/user/$(id -u)" \
+		-e XAUTHORITY \
+		-e DBUS_SESSION_BUS_ADDRESS \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+    -e DISPLAY \
+    -e TZ=CET-1 \
+    --device /dev/snd \
+    -v /dev/shm:/dev/shm \
+    -v ~/.config/Slack:/home/nico/.config/Slack \
+    -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
+    -v /home/nico/slack-home/:/home/nico \
+    -v /home/nico/Downloads:/home/nico/Downloads \
+    -u $(id -u):$(id -g) \
+    --name slack \
+    nsa/slack:3.3
+    #--device=/dev/video0:/dev/video0 \
+}
+
+cheese(){
+	del_stopped cheese
+
+	docker run -d \
+    -v /var/run/dbus:/var/run/dbus \
+    -v /run/user/1000/bus:/run/user/1000/bus \
+    -v ~/.dbus/:/home/nico/.dbus/ \
+		-v "${HOME}/.Xauthority:$HOME/.Xauthority" \
+		-v "/var/run/user/$(id -u):/var/run/user/$(id -u)" \
+		-e XAUTHORITY \
+		-e DBUS_SESSION_BUS_ADDRESS \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix/ \
+    -e DISPLAY \
+    --device /dev/snd \
+    --device /dev/dri \
+    --device /dev/video0 \
+    -v /dev/shm:/dev/shm \
+    -v /etc/passwd:/etc/passwd \
+    -v /etc/group:/etc/group \
+    -v ~/home/cheese-home/:/home/nico \
+    -u $(id -u):$(id -g) \
+    --name cheese \
+    nsa/cheese:1.0
 }
 
 hangups(){
@@ -549,14 +676,15 @@ playonlinux(){
 pulseaudio(){
 	del_stopped pulseaudio
 
-	docker run -d \
-		-v /etc/localtime:/etc/localtime:ro \
-		--device /dev/snd \
-		-p 4713:4713 \
-		--restart always \
-		--group-add audio \
-		--name pulseaudio \
-		nsa/pulseaudio
+ docker run -d \
+  -v /etc/localtime:/etc/localtime:ro \
+  --device /dev/snd \
+  --name pulseaudio \
+  -p 4713:4713 \
+  -v /var/run/dbus:/var/run/dbus \
+  -v /etc/machine-id:/etc/machine-id \
+  nsa/pulseaudio:1.0
+
 }
 
 spotify(){
@@ -710,3 +838,25 @@ cqlsh(){
     cassandra:2.1.20 \
     cqlsh cassandra
 }
+
+
+myrabbit(){
+
+	del_stopped myrabbit
+
+  docker run -d \
+  -p 5672:5672 \
+  -p 15672:15672 \
+  -e "HOME:${HOME}" \
+  -e RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG \
+  -e RABBITMQ_DEFAULT_USER=rabbitmq \
+  -e RABBITMQ_DEFAULT_PASS=rabbitmq \
+  -e RABBITMQ_DEFAULT_VHOST=/ \
+  -v $HOME/Projects/dockerfiles/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins \
+  --hostname myrabbit \
+  --name myrabbit \
+  rabbitmq:3-management
+
+}
+
+

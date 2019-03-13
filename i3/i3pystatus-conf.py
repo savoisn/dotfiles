@@ -21,6 +21,8 @@ status.register("keyboard_locks",
 status.register("clock",
     format="%a %-d %b %X KW%V",)
 
+
+
 # Shows the average load of the last minute and the last 5 minutes
 # (the default value for format is used)
 status.register("load")
@@ -41,10 +43,11 @@ status.register("temp",
 # goes below 5 percent while discharging. The block will also color RED.
 # If you don't have a desktop notification demon yet, take a look at dunst:
 #   http://www.knopwob.org/dunst/
+
 status.register("battery",
-    format="{status}/{consumption:.2f}W {percentage:.2f}% [{percentage_design:.2f}%] {remaining:%E%hh:%Mm}",
-    alert=True,
-    alert_percentage=5,
+    format="{status}{consumption:.2f}W {percentage:.2f}% \[{percentage_design:.2f}%\] {remaining:%E%hh:%Mm}",
+    alert=False,
+    alert_percentage=10,
     status={
         "DIS": "↓",
         "CHR": "↑",
@@ -53,15 +56,15 @@ status.register("battery",
 
 # This would look like this:
 # Discharging 6h:51m
-status.register("battery",
-    format="{status} {remaining:%E%hh:%Mm}",
-    alert=True,
-    alert_percentage=5,
-    status={
-        "DIS":  "Discharging",
-        "CHR":  "Charging",
-        "FULL": "Bat full",
-    },)
+# status.register("battery",
+    # format="{status} {remaining:%E%hh:%Mm}",
+    # alert=True,
+    # alert_percentage=5,
+    # status={
+        # "DIS":  "Discharging",
+        # "CHR":  "Charging",
+        # "FULL": "Bat full",
+    # },)
 
 # Displays whether a DHCP client is running
 status.register("runwatch",

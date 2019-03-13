@@ -54,7 +54,7 @@ DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #
-plugins=(git hub gulp npm nvm go jump docker docker-compose asdf mix)
+plugins=(git hub gulp npm nvm go jump docker docker-compose asdf mix kubectl)
 
 # User configuration
 
@@ -108,6 +108,7 @@ export PATH=$PATH:~/Applications/mongodb/bin
 export PATH=$PATH:~/bin/hub/bin
 export PATH=$PATH:~/bin/VSCode
 export PATH=$PATH:~/bin/arduino
+export PATH=$PATH:~/bin/todolist
 export PATH=$PATH:~/Applications/lci/
 export PATH=$PATH:~/Applications/gitflow/bin
 export PATH=$PATH:~/Applications/docker-compose
